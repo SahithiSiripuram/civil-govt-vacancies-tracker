@@ -81,6 +81,8 @@ table.t tr:hover td { background:var(--panel2); }
 .pill.civil { background:var(--civ-b); color:var(--civ-t); }
 .pill.any { background:var(--any-b); color:var(--any-t); }
 .pill.exp { background:var(--panel); color:var(--tx3); }
+.pill.priv { background:#3a2f16; color:#e0b769; }
+html[data-theme="light"] .pill.priv { background:#fdf3e3; color:#8a6414; }
 .pill.new { background:var(--ok-t); color:var(--bg); font-weight:700; letter-spacing:.03em; }
 html[data-theme="light"] .pill.new { background:#1e6b3a; color:#fff; }
 .cd { font-weight:650; font-size:12.5px; display:block; }
@@ -150,7 +152,7 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
   <div>
     <h1>Anush Job Tracker</h1>
 <ul class="crit">
-  <li>Central Govt &middot; PSUs &middot; Karnataka</li>
+  <li>Central Govt &middot; PSUs &middot; Karnataka &middot; top private employers</li>
   <li>B.E./B.Tech Civil accepted, or any branch / any degree</li>
   <li>Freshers &mdash; no mandatory experience</li>
   <li>Applications currently open</li>
@@ -175,6 +177,12 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
   <button class="f" data-filter="all" aria-pressed="true">All</button>
   <button class="f" data-filter="Civil-specific" aria-pressed="false">Civil-specific</button>
   <button class="f" data-filter="Any branch" aria-pressed="false">Any branch</button>
+</div>
+<div class="filters">
+  <span class="lbl">Sector:</span>
+  <button class="sec" data-sector="all" aria-pressed="true">All</button>
+  <button class="sec" data-sector="Government" aria-pressed="false">Government</button>
+  <button class="sec" data-sector="Private" aria-pressed="false">Private</button>
 </div>
 <div class="filters">
   <span class="lbl">Status:</span>
@@ -219,7 +227,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "salary": "Stipend Rs. 10,000 per month (1-year training)",
       "applyLink": "https://epi.gov.in/career",
       "notificationLink": "https://epi.gov.in/career",
-      "dateAdded": "2026-08-01"
+      "dateAdded": "2026-08-01",
+      "sector": "Government"
     },
     {
       "lastDate": "2026-08-05",
@@ -233,7 +242,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "salary": "Rs. 70,000 – 80,000 per month (consolidated)",
       "applyLink": "https://recruitment.nhidcl.com",
       "notificationLink": "https://nhidcl.com",
-      "dateAdded": "2026-08-01"
+      "dateAdded": "2026-08-01",
+      "sector": "Government"
     },
     {
       "lastDate": "2026-08-07",
@@ -247,7 +257,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "salary": "Level 10: Rs. 56,100 – 1,77,500 + MSP Rs. 15,500",
       "applyLink": "https://joinindianarmy.nic.in/Authentication.aspx",
       "notificationLink": "https://joinindianarmy.nic.in",
-      "dateAdded": "2026-08-01"
+      "dateAdded": "2026-08-01",
+      "sector": "Government"
     },
     {
       "lastDate": "2026-08-07",
@@ -261,7 +272,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "salary": "Rs. 37,500 – 76,100 (2024 revised state scale)",
       "applyLink": "https://cetonline.karnataka.gov.in/kea/",
       "notificationLink": "https://cetonline.karnataka.gov.in/kea/",
-      "dateAdded": "2026-08-01"
+      "dateAdded": "2026-08-01",
+      "sector": "Government"
     },
     {
       "lastDate": "2026-08-10",
@@ -275,7 +287,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "salary": "Not Mentioned",
       "applyLink": "https://cetonline.karnataka.gov.in/kea/",
       "notificationLink": "https://cetonline.karnataka.gov.in/kea/",
-      "dateAdded": "2026-08-01"
+      "dateAdded": "2026-08-01",
+      "sector": "Government"
     },
     {
       "lastDate": "2026-08-14",
@@ -289,7 +302,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "salary": "Level-7: Rs. 44,900 – 1,42,400",
       "applyLink": "https://delhi.cantt.gov.in",
       "notificationLink": "https://delhi.cantt.gov.in",
-      "dateAdded": "2026-08-01"
+      "dateAdded": "2026-08-01",
+      "sector": "Government"
     },
     {
       "lastDate": "2026-08-14",
@@ -303,7 +317,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "salary": "Level-6: Rs. 35,400 – 1,12,400",
       "applyLink": "https://delhi.cantt.gov.in",
       "notificationLink": "https://delhi.cantt.gov.in",
-      "dateAdded": "2026-08-01"
+      "dateAdded": "2026-08-01",
+      "sector": "Government"
     },
     {
       "lastDate": "2026-08-14",
@@ -317,7 +332,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "salary": "Not Mentioned",
       "applyLink": "https://hal-india.co.in/careers",
       "notificationLink": "https://hal-india.co.in/careers",
-      "dateAdded": "2026-08-01"
+      "dateAdded": "2026-08-01",
+      "sector": "Government"
     },
     {
       "lastDate": "2026-08-17",
@@ -331,7 +347,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "salary": "Level 10: Rs. 56,100 – 1,77,500",
       "applyLink": "https://www.isro.gov.in/Careers.html",
       "notificationLink": "https://www.isro.gov.in/ICRB_Recruitment12.html",
-      "dateAdded": "2026-08-01"
+      "dateAdded": "2026-08-01",
+      "sector": "Government"
     },
     {
       "lastDate": "2026-09-13",
@@ -345,7 +362,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "salary": "Level-6: Rs. 35,400 – 1,12,400",
       "applyLink": "https://www.rrbapply.gov.in",
       "notificationLink": "https://rrb.indianrailways.gov.in",
-      "dateAdded": "2026-08-01"
+      "dateAdded": "2026-08-01",
+      "sector": "Government"
     }
   ],
   "sources": [
@@ -859,9 +877,170 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "url": "https://ksrtc.karnataka.gov.in",
       "lastChecked": "2026-08-01",
       "result": "Nothing new (aggregator sweep)"
+    },
+    {
+      "name": "L&T Construction (L&T ECC)",
+      "category": "Private — EPC",
+      "url": "https://larsentoubrocareers.peoplestrong.com/",
+      "lastChecked": "",
+      "result": "Portal requires JS — not enumerable by fetch"
+    },
+    {
+      "name": "Tata Projects",
+      "category": "Private — EPC",
+      "url": "https://www.tataprojects.com/careers/",
+      "lastChecked": "",
+      "result": "Portal requires JS — not enumerable by fetch"
+    },
+    {
+      "name": "Afcons Infrastructure",
+      "category": "Private — EPC",
+      "url": "https://www.afcons.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Shapoorji Pallonji E&C",
+      "category": "Private — EPC",
+      "url": "https://www.shapoorjipallonji.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Megha Engineering (MEIL)",
+      "category": "Private — EPC",
+      "url": "https://meil.in/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Dilip Buildcon",
+      "category": "Private — EPC",
+      "url": "https://www.dilipbuildcon.com/career",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "NCC Limited",
+      "category": "Private — EPC",
+      "url": "https://www.nccltd.in/careers.php",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "AECOM India",
+      "category": "Private — Consultancy",
+      "url": "https://aecom.jobs",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Jacobs India",
+      "category": "Private — Consultancy",
+      "url": "https://careers.jacobs.com",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "WSP India",
+      "category": "Private — Consultancy",
+      "url": "https://www.wsp.com/en-in/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Arup India",
+      "category": "Private — Consultancy",
+      "url": "https://www.arup.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Mott MacDonald India",
+      "category": "Private — Consultancy",
+      "url": "https://www.mottmac.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "STUP Consultants",
+      "category": "Private — Consultancy",
+      "url": "https://www.stupmail.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Godrej Properties",
+      "category": "Private — Developer",
+      "url": "https://www.godrejproperties.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Prestige Group",
+      "category": "Private — Developer",
+      "url": "https://www.prestigeconstructions.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Brigade Group",
+      "category": "Private — Developer",
+      "url": "https://www.brigadegroup.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Puravankara",
+      "category": "Private — Developer",
+      "url": "https://www.puravankara.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Sobha Limited",
+      "category": "Private — Developer",
+      "url": "https://www.sobha.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "GMR Group",
+      "category": "Private — Infra operator",
+      "url": "https://www.gmrgroup.in/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Adani Infrastructure",
+      "category": "Private — Infra operator",
+      "url": "https://www.adani.com/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "JSW Infrastructure",
+      "category": "Private — Infra operator",
+      "url": "https://www.jsw.in/careers",
+      "lastChecked": "",
+      "result": ""
+    },
+    {
+      "name": "Reliance Infrastructure",
+      "category": "Private — Infra operator",
+      "url": "https://www.rinfra.com/careers",
+      "lastChecked": "",
+      "result": ""
     }
   ],
   "log": [
+    {
+      "date": "2026-08-01",
+      "added": 0,
+      "total": 10,
+      "orgs": "Scope expanded — 22 private employers added to the source checklist (EPC, consultancies, developers, infra operators). No private vacancy verified yet; their career portals are JavaScript-driven and need browser rendering.",
+      "timestamp": "01-Aug-2026 03:05 IST"
+    },
     {
       "date": "2026-08-01",
       "added": 0,
@@ -914,6 +1093,7 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
 
   // "in 2 days" beats a bare date — it's the number you act on.
   function countdown(iso){
+    if (!iso) return "Rolling";
     var d = days(iso);
     if (d < 0)  return "Closed";
     if (d === 0) return "Closes today";
@@ -922,8 +1102,9 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
     if (d < 60)  return "in " + Math.round(d/7) + " weeks";
     return "in " + Math.round(d/30) + " months";
   }
-  function bucket(iso){ var d=days(iso); return d<=7?0:(d<=30?1:2); }
-  var BUCKETS = ["Closing this week","Closing this month","Later"];
+  // Private roles are often open until filled, with no published closing date.
+  function bucket(iso){ if(!iso) return 3; var d=days(iso); return d<=7?0:(d<=30?1:2); }
+  var BUCKETS = ["Closing this week","Closing this month","Later","Rolling \u2014 no stated deadline"];
 
   // ---- theme ----
   var THEME="civilTracker.theme";
@@ -974,16 +1155,18 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
   }
   function keyOf(o,p){ return (o+"|"+p).toLowerCase().replace(/[^a-z0-9|]+/g,""); }
   function markOf(r){ return marks[keyOf(r.organization,r.post)]||""; }
-  function isExpired(r){ return days(r.lastDate)<0; }
+  function isExpired(r){ return !!r.lastDate && days(r.lastDate)<0; }
 
   // ---- new since last visit ----
   var SEEN="civilTracker.lastSeen";
   var lastSeen = localStorage.getItem(SEEN) || "";
   function isNew(r){ return !!lastSeen && r.dateAdded > lastSeen; }
 
+  // Undated rows sort last, after every real deadline.
+  function dkey(r){ return r.lastDate || "9999-12-31"; }
   var all = DATA.vacancies.slice().sort(function(a,b){
-    return a.lastDate===b.lastDate ? a.organization.localeCompare(b.organization)
-                                   : a.lastDate.localeCompare(b.lastDate); });
+    return dkey(a)===dkey(b) ? a.organization.localeCompare(b.organization)
+                             : dkey(a).localeCompare(dkey(b)); });
 
   var freshCount = all.filter(isNew).length;
   if (lastSeen && freshCount) {
@@ -992,11 +1175,12 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
     b.style.display="block";
   }
 
-  var elig="all", stat="all", query="", sortKey="lastDate", sortAsc=true;
+  var elig="all", stat="all", sect="all", query="", sortKey="lastDate", sortAsc=true;
 
   function visible(){
     return all.filter(function(r){
       if (elig!=="all" && (r.eligibility||"Civil-specific")!==elig) return false;
+      if (sect!=="all" && (r.sector||"Government")!==sect) return false;
       var m=markOf(r), exp=isExpired(r);
       if (stat==="applied" && m!=="applied") return false;
       if (stat==="dismissed" && !(m==="not-eligible"||m==="not-interested"||exp)) return false;
@@ -1022,7 +1206,7 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
   function stats(list){
     var s=0, soon=0, orgs={};
     list.forEach(function(r){ s+=seats(r); orgs[r.organization]=1;
-      var d=days(r.lastDate); if(d>=0&&d<=7) soon++; });
+      var d=r.lastDate?days(r.lastDate):999; if(d>=0&&d<=7) soon++; });
     document.getElementById("c-notif").textContent=list.length;
     document.getElementById("c-seats").textContent=s.toLocaleString("en-IN");
     document.getElementById("c-week").textContent=soon;
@@ -1038,7 +1222,9 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
   }
   function badges(r){
     var el=r.eligibility||"Civil-specific";
+    var sec=r.sector||"Government";
     return '<span class="pill '+(el==="Any branch"?"any":"civil")+'">'+esc(el)+"</span>"+
+           (sec==="Private"?' <span class="pill priv">Private</span>':"")+
            (isNew(r)?' <span class="pill new">NEW</span>':"");
   }
   function dimmed(r){ var m=markOf(r); return isExpired(r)||m==="not-eligible"||m==="not-interested"; }
@@ -1060,9 +1246,9 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
               BUCKETS[bk]+' <span class="gn">'+list.filter(function(x){return bucket(x.lastDate)===bk;}).length+"</span></div></td></tr>";
         last=bk;
       }
-      var d=days(r.lastDate);
+      var d=r.lastDate?days(r.lastDate):999;
       body+='<tr class="'+(dimmed(r)?"dim":"")+'">'+
-        '<td><span class="cd'+(d<=7?" hot":"")+'">'+countdown(r.lastDate)+'</span><span class="dt">'+fmt(r.lastDate)+"</span></td>"+
+        '<td><span class="cd'+(d<=7?" hot":"")+'">'+countdown(r.lastDate)+'</span><span class="dt">'+(r.lastDate?fmt(r.lastDate):"")+"</span></td>"+
         "<td>"+selectHtml(r)+"</td>"+
         "<td>"+esc(r.organization)+"</td>"+
         "<td>"+esc(r.post)+"</td>"+
@@ -1123,6 +1309,7 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
   }
   wire("button.f","data-filter",function(v){ elig=v; });
   wire("button.s","data-status",function(v){ stat=v; });
+  wire("button.sec","data-sector",function(v){ sect=v; });
 
   var qt;
   document.getElementById("q").addEventListener("input",function(e){
@@ -1162,7 +1349,8 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
     src.forEach(function(s){ if(s.lastChecked===DATA.asOf) t++; if(!s.lastChecked) n++; });
     document.getElementById("cov-sum").textContent =
       t+" of "+src.length+" checked on "+fmt(DATA.asOf)+(n?" · "+n+" not yet checked":" · all covered");
-    var order=["Central","Defence","PSU","Banking/Finance","Karnataka"], g={};
+    var order=["Central","Defence","PSU","Banking/Finance","Karnataka",
+               "Private — EPC","Private — Consultancy","Private — Developer","Private — Infra operator"], g={};
     src.forEach(function(s){ (g[s.category]=g[s.category]||[]).push(s); });
     document.getElementById("cov-list").innerHTML = order.filter(function(c){return g[c];}).map(function(c){
       return '<div class="cov-grp">'+esc(c)+" ("+g[c].length+')</div><table class="cov-t">'+
