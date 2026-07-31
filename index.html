@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>B.Tech Civil Government Job Vacancies Tracker</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/theme/mermaid.min.css" integrity="sha384-jZvDSsmGB9oGGT/4l9bHXGoAv1OxvG/cFmSo0dZaSqmBgvQTKDBFAMftlXTmMbNW" crossorigin="anonymous">
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 20px 22px 40px;
+  background: #ffffff; color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 14px; line-height: 1.5;
+}
+h1 { font-size: 20px; margin: 0 0 4px; letter-spacing: -0.01em; }
+.sub { color: #5b6470; font-size: 12.5px; margin-bottom: 18px; }
+.scope { display:inline-block; background:#eef4fb; color:#1f4e79; border:1px solid #cfe0f2;
+  border-radius: 999px; padding: 2px 10px; font-size: 11.5px; font-weight: 600; margin-right:6px;}
+.cards { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.card { flex: 1 1 150px; background: #f7f9fc; border: 1px solid #e3e9f0; border-radius: 10px; padding: 12px 14px; }
+.card .n { font-size: 22px; font-weight: 650; color: #1f4e79; line-height: 1.2; }
+.card .l { font-size: 11.5px; color: #5b6470; text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
+.card .h { font-size: 11px; color: #8b939d; margin-top: 3px; }
+.card.warn .n { color: #b3541e; }
+h2 { font-size: 14.5px; margin: 26px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #e6eaee; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+.filters .lbl { font-size: 11.5px; color: #6b7480; margin-right: 2px; }
+button.f {
+  font: inherit; font-size: 12px; font-weight: 550; cursor: pointer;
+  background: #fff; color: #41505f; border: 1px solid #d7dee6;
+  border-radius: 999px; padding: 4px 13px;
+}
+button.f:hover { border-color: #9fb4c9; }
+button.f[aria-pressed="true"] { background: #1f4e79; color: #fff; border-color: #1f4e79; }
+#grid { margin-bottom: 8px; }
+.gridjs-table { font-size: 12.5px; }
+.gridjs-th { background: #1f4e79 !important; color: #fff !important; font-size: 11.5px !important; }
+.gridjs-th-content { white-space: normal; }
+.gridjs-td { vertical-align: top !important; }
+.gridjs-wrapper { box-shadow: none; border: 1px solid #e3e9f0; }
+a { color: #1f4e79; }
+.pill { display:inline-block; padding:1px 7px; border-radius:999px; font-size:11px; font-weight:600; white-space:nowrap; }
+.pill.yes { background:#e6f4ea; color:#1e6b3a; }
+.pill.soon { background:#fdecea; color:#b3261e; }
+.pill.ok { background:#eef2f6; color:#41505f; }
+.pill.civil { background:#eaf1f9; color:#1f4e79; }
+.pill.any { background:#f3ecfa; color:#5b3a86; }
+.pill.expired { background:#eceff2; color:#77818c; }
+select.st {
+  font: inherit; font-size: 11.5px; width: 100%; cursor: pointer;
+  border: 1px solid #d7dee6; border-radius: 6px; padding: 3px 5px;
+  background: #fff; color: #41505f;
+}
+select.st:hover { border-color: #9fb4c9; }
+select.st[data-v="applied"] { background:#e6f4ea; border-color:#a8d5b8; color:#1e6b3a; font-weight:600; }
+select.st[data-v="not-eligible"] { background:#fdecea; border-color:#f0bdb7; color:#b3261e; }
+select.st[data-v="not-interested"] { background:#f4f5f7; border-color:#dde1e6; color:#77818c; }
+.gridjs-tr.dim .gridjs-td { opacity: .5; }
+table.log { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+table.log th, table.log td { border: 1px solid #e3e9f0; padding: 7px 9px; text-align: left; vertical-align: top; }
+table.log th { background: #f7f9fc; font-weight: 600; color: #41505f; }
+.note { font-size: 11.5px; color: #6b7480; margin-top: 14px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<h1>B.Tech Civil Government Job Vacancies Tracker</h1>
+<div class="sub">
+  <span class="scope">Central Govt</span><span class="scope">PSUs</span><span class="scope">Karnataka</span>
+  Open government vacancies you can apply to as a B.E./B.Tech Civil fresher — both Civil-specific posts and
+  branch-agnostic ones (defence officer entries, any-engineering and any-degree roles).
+</div>
+
+<div class="cards">
+  <div class="card"><div class="n" id="c-notif">0</div><div class="l">Open notifications</div><div class="h">rows in the table below</div></div>
+  <div class="card"><div class="n" id="c-seats">0</div><div class="l">Total seats</div><div class="h">vacancies summed across rows</div></div>
+  <div class="card warn"><div class="n" id="c-week">0</div><div class="l">Closing in 7 days</div><div class="h">deadline within a week</div></div>
+  <div class="card"><div class="n" id="c-org">0</div><div class="l">Organizations</div><div class="h">distinct recruiters</div></div>
+</div>
+
+<div class="filters">
+  <span class="lbl">Eligibility:</span>
+  <button class="f" data-filter="all" aria-pressed="true">All</button>
+  <button class="f" data-filter="Civil-specific" aria-pressed="false">Civil-specific</button>
+  <button class="f" data-filter="Any branch" aria-pressed="false">Any branch / any degree</button>
+</div>
+<div class="filters">
+  <span class="lbl">Status:</span>
+  <button class="s" data-status="all" aria-pressed="true">All</button>
+  <button class="s" data-status="open" aria-pressed="false">To act on</button>
+  <button class="s" data-status="applied" aria-pressed="false">Applied</button>
+  <button class="s" data-status="dismissed" aria-pressed="false">Dismissed</button>
+</div>
+
+<div id="grid"></div>
+<div class="note" id="asof"></div>
+
+<h2>Daily update log</h2>
+<table class="log">
+  <thead><tr><th style="width:110px">Date</th><th style="width:70px">New</th><th style="width:70px">Total</th><th>Organizations added</th><th style="width:150px">Timestamp</th></tr></thead>
+  <tbody id="logbody"></tbody>
+</table>
+
+<div class="note">
+  <strong>Inclusion rules:</strong> open to a B.E./B.Tech Civil graduate — either explicitly Civil, or open to any engineering branch / any degree ·
+  no mandatory work experience (freshers eligible) · applications currently open.
+  Vacancies whose closing date has passed drop off the list automatically. The official recruitment notification is the source of truth where sources conflict.
+  Always confirm details on the official portal before applying.
+  <br><strong>Status column:</strong> mark each row Applied / Not eligible / Not interested — your marks are saved in this browser only
+  (they are not shared, and won't follow you to another device). <em>Expired</em> is set automatically once a deadline passes.
+</div>
+
+<script id="tracker-data" type="application/json">
+{
+  "asOf": "2026-08-01",
+  "vacancies": [
+    {
+      "lastDate": "2026-08-03",
+      "organization": "Indian Navy",
+      "post": "Short Service Commission Officer – AT-27 (June 2027 course), Executive / Logistics / ATC / Technical branches",
+      "eligibility": "Any branch",
+      "qualification": "B.E./B.Tech in any discipline (branch requirements vary by cadre); unmarried men & women, DOB 02-07-2002 to 01-01-2008. No written exam — shortlisting on marks, then SSB",
+      "freshers": "Yes",
+      "vacancies": "275 (all branches)",
+      "location": "All India (Indian Navy establishments)",
+      "salary": "Level 10: Rs. 56,100 – 1,77,500 + MSP Rs. 15,500",
+      "applyLink": "https://www.joinindiannavy.gov.in",
+      "notificationLink": "https://www.joinindiannavy.gov.in",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-08-05",
+      "organization": "National Highways & Infrastructure Development Corporation (NHIDCL)",
+      "post": "Associate – Civil Engineering (State Specific Graduate Scheme, contract)",
+      "eligibility": "Civil-specific",
+      "qualification": "B.Tech/B.E. Civil Engineering from IIT / NIT / NIRF Top-100 institute; final-year students eligible",
+      "freshers": "Yes",
+      "vacancies": "100",
+      "location": "Across India (incl. North East project states)",
+      "salary": "Rs. 70,000 – 80,000 per month (consolidated)",
+      "applyLink": "https://recruitment.nhidcl.com",
+      "notificationLink": "https://nhidcl.com",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-08-05",
+      "organization": "Engineering Projects (India) Ltd (EPIL) – Mini Ratna CPSE",
+      "post": "Graduate Apprentice (Civil)",
+      "eligibility": "Civil-specific",
+      "qualification": "B.E./B.Tech Civil with min 55%; degree passed in 2023, 2024 or 2025; age 18–30 yrs. Merit-based, no interview",
+      "freshers": "Yes",
+      "vacancies": "2 (Civil / Electrical / Mechanical)",
+      "location": "Chennai (SRO) and Hyderabad (PCO)",
+      "salary": "Stipend Rs. 10,000 per month (1-year training)",
+      "applyLink": "https://www.epilindia.com/careers",
+      "notificationLink": "https://www.epilindia.com/careers",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-08-06",
+      "organization": "Indian Army",
+      "post": "SSCW (Tech)-68 – Civil/Architecture stream (Women, Apr 2027 course)",
+      "eligibility": "Civil-specific",
+      "qualification": "B.E./B.Tech Civil Engineering (final-year eligible); unmarried women, 20–27 yrs as on 01-04-2027",
+      "freshers": "Yes",
+      "vacancies": "7",
+      "location": "All India (training at OTA)",
+      "salary": "Level 10: Rs. 56,100 – 1,77,500 + MSP Rs. 15,500",
+      "applyLink": "https://joinindianarmy.nic.in/Authentication.aspx",
+      "notificationLink": "https://joinindianarmy.nic.in",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-08-07",
+      "organization": "Indian Army",
+      "post": "SSC (Tech)-68 – Civil Engineering stream (Men, Apr 2027 course)",
+      "eligibility": "Civil-specific",
+      "qualification": "B.E./B.Tech Civil Engineering (final-year eligible); unmarried men, 20–27 yrs as on 01-04-2027",
+      "freshers": "Yes",
+      "vacancies": "75",
+      "location": "All India (training at OTA Gaya)",
+      "salary": "Level 10: Rs. 56,100 – 1,77,500 + MSP Rs. 15,500",
+      "applyLink": "https://joinindianarmy.nic.in/Authentication.aspx",
+      "notificationLink": "https://joinindianarmy.nic.in",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-08-07",
+      "organization": "Karnataka Examinations Authority (Revenue Dept – Land Records)",
+      "post": "Land Surveyor (Bhoomapaka)",
+      "eligibility": "Any branch",
+      "qualification": "Degree in any Engineering/Technology stream, or specified B.Sc.; compulsory Kannada language test",
+      "freshers": "Yes",
+      "vacancies": "750",
+      "location": "Karnataka",
+      "salary": "Rs. 37,500 – 76,100 (2024 revised state scale)",
+      "applyLink": "https://cetonline.karnataka.gov.in/kea/",
+      "notificationLink": "https://cetonline.karnataka.gov.in/kea/",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-08-10",
+      "organization": "Karnataka Examinations Authority (Revenue Department)",
+      "post": "Village Accountant / Village Administrative Officer (VAO)",
+      "eligibility": "Any branch",
+      "qualification": "PUC or equivalent — a B.E./B.Tech Civil degree qualifies; Kannada requirement applies. Written exam only, no interview",
+      "freshers": "Yes",
+      "vacancies": "572 (505 general + 67 Kalyana Karnataka)",
+      "location": "Karnataka",
+      "salary": "Not Mentioned",
+      "applyLink": "https://cetonline.karnataka.gov.in/kea/",
+      "notificationLink": "https://cetonline.karnataka.gov.in/kea/",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-08-14",
+      "organization": "Delhi Cantonment Board (Ministry of Defence)",
+      "post": "Assistant Engineer (Civil)",
+      "eligibility": "Civil-specific",
+      "qualification": "B.E./B.Tech Civil Engineering; age 21–30 yrs as on 14-08-2026; CBT only, no interview",
+      "freshers": "Yes",
+      "vacancies": "2",
+      "location": "Delhi",
+      "salary": "Level-7: Rs. 44,900 – 1,42,400",
+      "applyLink": "https://delhi.cantt.gov.in",
+      "notificationLink": "https://delhi.cantt.gov.in",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-08-14",
+      "organization": "Delhi Cantonment Board (Ministry of Defence)",
+      "post": "Junior Engineer (Civil)",
+      "eligibility": "Civil-specific",
+      "qualification": "Degree or 3-year Diploma in Civil Engineering; age 21–30 yrs as on 14-08-2026",
+      "freshers": "Yes",
+      "vacancies": "5",
+      "location": "Delhi",
+      "salary": "Level-6: Rs. 35,400 – 1,12,400",
+      "applyLink": "https://delhi.cantt.gov.in",
+      "notificationLink": "https://delhi.cantt.gov.in",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-08-14",
+      "organization": "Hindustan Aeronautics Limited (HAL)",
+      "post": "Management Trainee (Civil)",
+      "eligibility": "Civil-specific",
+      "qualification": "Full-time B.E./B.Tech Civil Engineering with prescribed minimum marks; max 28 yrs",
+      "freshers": "Yes",
+      "vacancies": "2",
+      "location": "HAL divisions across India (HQ Bengaluru)",
+      "salary": "Not Mentioned",
+      "applyLink": "https://hal-india.co.in",
+      "notificationLink": "https://hal-india.co.in",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-08-17",
+      "organization": "Indian Space Research Organisation (ISRO / ICRB)",
+      "post": "Scientist/Engineer 'SC' – Civil (via GATE score)",
+      "eligibility": "Civil-specific",
+      "qualification": "B.E./B.Tech Civil Engineering + valid GATE score; max 28 yrs as on 17-08-2026",
+      "freshers": "Yes",
+      "vacancies": "10 (+1 at PRL)",
+      "location": "ISRO centres across India",
+      "salary": "Level 10: Rs. 56,100 – 1,77,500",
+      "applyLink": "https://www.isro.gov.in/Careers.html",
+      "notificationLink": "https://www.isro.gov.in/Careers.html",
+      "dateAdded": "2026-08-01"
+    },
+    {
+      "lastDate": "2026-09-13",
+      "organization": "Railway Recruitment Boards (RRB) – CEN 04/2026",
+      "post": "Junior Engineer (Civil / Engineering department)",
+      "eligibility": "Civil-specific",
+      "qualification": "Degree or Diploma in Civil Engineering; age 18–33 yrs as on 01-01-2027. Applications open 14-08-2026",
+      "freshers": "Yes",
+      "vacancies": "1,654 (Civil/Engineering dept, of 4,098 total)",
+      "location": "All India (zonal railways)",
+      "salary": "Level-6: Rs. 35,400 – 1,12,400",
+      "applyLink": "https://www.rrbapply.gov.in",
+      "notificationLink": "https://rrb.indianrailways.gov.in",
+      "dateAdded": "2026-08-01"
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-08-01",
+      "added": 12,
+      "total": 12,
+      "orgs": "Indian Navy; NHIDCL; EPIL; Indian Army (SSC Tech-68 Men, SSCW Tech-68 Women); Karnataka Examinations Authority (Land Surveyor, VAO); Delhi Cantonment Board (AE & JE); HAL; ISRO; RRB (CEN 04/2026)",
+      "timestamp": "01-Aug-2026 00:00 IST"
+    }
+  ]
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/gridjs.umd.js" integrity="sha384-/XXDzxe4FsGiAe50i/u9pY/Vy/uX654MHB1xoc1BJNnH1WXHhqHga9g3q5tF4gj7" crossorigin="anonymous"></script>
+<script>
+(function () {
+  var DATA = JSON.parse(document.getElementById("tracker-data").textContent);
+  var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var today = new Date(DATA.asOf + "T00:00:00");
+  var grid = null;
+
+  function fmt(iso) {
+    if (!iso) return "";
+    var p = iso.split("-");
+    return p[2] + "-" + MON[parseInt(p[1], 10) - 1] + "-" + p[0];
+  }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function days(iso) {
+    return Math.round((new Date(iso + "T00:00:00") - today) / 86400000);
+  }
+
+  var all = DATA.vacancies.slice().sort(function (a, b) {
+    return a.lastDate === b.lastDate
+      ? a.organization.localeCompare(b.organization)
+      : a.lastDate.localeCompare(b.lastDate);
+  });
+
+  // ---- Your status marks, saved in this browser (localStorage) ----------------
+  var STORE = "civilTrackerStatus.v1";
+  var STATUSES = [
+    { v: "", label: "— Not marked" },
+    { v: "applied", label: "Applied" },
+    { v: "not-eligible", label: "Not eligible" },
+    { v: "not-interested", label: "Not interested" }
+  ];
+  var marks = {};
+  try { marks = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { marks = {}; }
+
+  // Stable per-vacancy key: survives edits to qualification/salary/link text.
+  function keyOf(org, post) {
+    return (org + "|" + post).toLowerCase().replace(/[^a-z0-9|]+/g, "");
+  }
+  function markOf(r) { return marks[keyOf(r.organization, r.post)] || ""; }
+  function setMark(k, v) {
+    if (v) { marks[k] = v; } else { delete marks[k]; }
+    try { localStorage.setItem(STORE, JSON.stringify(marks)); } catch (e) {}
+  }
+  function labelOf(v) {
+    for (var i = 0; i < STATUSES.length; i++) if (STATUSES[i].v === v) return STATUSES[i].label;
+    return "— Not marked";
+  }
+  // Expired is derived from the deadline, never chosen by hand.
+  function isExpired(r) { return days(r.lastDate) < 0; }
+  function statusText(r) { return isExpired(r) ? "Expired" : labelOf(markOf(r)); }
+
+  function toRows(list) {
+    return list.map(function (r) {
+      return [r.lastDate, statusText(r), r.organization, r.post, r.eligibility || "Civil-specific",
+              r.qualification, r.freshers, r.vacancies, r.location, r.salary,
+              "", r.applyLink, r.notificationLink];
+    });
+  }
+
+  // "1,654 (Civil dept, of 4,098 total)" -> 1654. Only the leading figure counts;
+  // anything in parentheses is context, not extra seats.
+  function seatCount(v) {
+    var m = String(v).split("(")[0].match(/[\d,]+/);
+    return m ? parseInt(m[0].replace(/,/g, ""), 10) : NaN;
+  }
+
+  function stats(list) {
+    var seats = 0, soon = 0, orgs = {};
+    list.forEach(function (r) {
+      var n = seatCount(r.vacancies);
+      if (!isNaN(n)) seats += n;
+      orgs[r.organization] = 1;
+      var d = days(r.lastDate);
+      if (d >= 0 && d <= 7) soon++;
+    });
+    document.getElementById("c-notif").textContent = list.length;
+    document.getElementById("c-seats").textContent = seats.toLocaleString("en-IN");
+    document.getElementById("c-week").textContent = soon;
+    document.getElementById("c-org").textContent = Object.keys(orgs).length;
+  }
+
+  var html = gridjs.html;
+  var columns = [
+    { name: "Last Date", width: "104px", formatter: function (cell) {
+        var d = days(cell);
+        return html('<span class="pill ' + (d <= 7 ? "soon" : "ok") + '">' + fmt(cell) + "</span>");
+      } },
+    { name: "Status", width: "132px", formatter: function (cell, row) {
+        if (cell === "Expired") return html('<span class="pill expired">Expired</span>');
+        var k = keyOf(row.cells[2].data, row.cells[3].data);
+        var cur = marks[k] || "";
+        var opts = STATUSES.map(function (s) {
+          return '<option value="' + s.v + '"' + (s.v === cur ? " selected" : "") + ">" + s.label + "</option>";
+        }).join("");
+        return html('<select class="st" data-key="' + k + '" data-v="' + cur + '">' + opts + "</select>");
+      } },
+    { name: "Organization", width: "180px" },
+    { name: "Post", width: "205px" },
+    { name: "Open to", width: "108px", formatter: function (c) {
+        return html('<span class="pill ' + (c === "Any branch" ? "any" : "civil") + '">' + esc(c) + "</span>");
+      } },
+    { name: "Qualification", width: "240px" },
+    { name: "Freshers", width: "84px", formatter: function (c) {
+        return html('<span class="pill yes">' + esc(c) + "</span>");
+      } },
+    { name: "Vacancies", width: "116px" },
+    { name: "Location", width: "150px" },
+    { name: "Salary / Pay Level", width: "165px" },
+    { name: "Links", width: "118px", sort: false, formatter: function (_, row) {
+        return html(
+          '<a href="' + esc(row.cells[11].data) + '" target="_blank" rel="noopener">Apply</a> &middot; ' +
+          '<a href="' + esc(row.cells[12].data) + '" target="_blank" rel="noopener">Notification</a>'
+        );
+      } },
+    { name: "applyLink", hidden: true },
+    { name: "notificationLink", hidden: true }
+  ];
+
+  function render(list) {
+    stats(list);
+    if (grid) {
+      grid.updateConfig({ data: toRows(list) }).forceRender();
+    } else {
+      grid = new gridjs.Grid({
+        columns: columns,
+        data: toRows(list),
+        sort: true,
+        search: true,
+        fixedHeader: true,
+        style: { table: { "white-space": "normal" } }
+      });
+      grid.render(document.getElementById("grid"));
+    }
+  }
+
+  var elig = "all", stat = "all";
+
+  function visible() {
+    return all.filter(function (r) {
+      if (elig !== "all" && (r.eligibility || "Civil-specific") !== elig) return false;
+      if (stat === "all") return true;
+      var m = markOf(r), exp = isExpired(r);
+      if (stat === "applied") return m === "applied";
+      if (stat === "dismissed") return m === "not-eligible" || m === "not-interested" || exp;
+      // "To act on": still open and not yet dealt with.
+      return !exp && m !== "applied" && m !== "not-eligible" && m !== "not-interested";
+    });
+  }
+  function refresh() { render(visible()); }
+
+  function wire(sel, attr, set) {
+    Array.prototype.forEach.call(document.querySelectorAll(sel), function (btn) {
+      btn.addEventListener("click", function () {
+        Array.prototype.forEach.call(document.querySelectorAll(sel), function (b) {
+          b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+        });
+        set(btn.getAttribute(attr));
+        refresh();
+      });
+    });
+  }
+  wire("button.f", "data-filter", function (v) { elig = v; });
+  wire("button.s", "data-status", function (v) { stat = v; });
+
+  // Grid.js rebuilds its DOM on every render, so delegate from the container.
+  document.getElementById("grid").addEventListener("change", function (e) {
+    var el = e.target;
+    if (!el || !el.classList || !el.classList.contains("st")) return;
+    setMark(el.getAttribute("data-key"), el.value);
+    el.setAttribute("data-v", el.value);
+    refresh();
+  });
+
+  render(all);
+  document.getElementById("asof").textContent =
+    "Data as of " + fmt(DATA.asOf) + ". Click a column header to re-sort, or use the search box above the table.";
+
+  document.getElementById("logbody").innerHTML = DATA.log.slice()
+    .sort(function (a, b) { return b.date.localeCompare(a.date); })
+    .map(function (l) {
+      return "<tr><td>" + fmt(l.date) + "</td><td>" + esc(l.added) + "</td><td>" +
+        esc(l.total) + "</td><td>" + esc(l.orgs) + "</td><td>" + esc(l.timestamp) + "</td></tr>";
+    }).join("");
+})();
+</script>
+</body>
+</html>
