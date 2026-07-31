@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Civil Engineering Government Job Tracker</title>
+<title>Anush Job Tracker</title>
 <style>
 :root {
   color-scheme: dark;
@@ -54,6 +54,8 @@ html[data-theme="light"] button.f[aria-pressed="true"] { color:#fff; }
   padding:7px 11px; font:inherit; font-size:13px; width:260px; max-width:100%; margin-bottom:14px; }
 #q::placeholder { color:var(--tx3); }
 .count { font-size:12px; color:var(--tx2); margin-bottom:12px; }
+.sync { font-size:11.5px; color:var(--tx3); height:14px; margin:-8px 0 10px; }
+.sync.warn { color:var(--warn); }
 .grp { font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
   color:var(--tx2); margin:22px 0 9px; padding-bottom:6px; border-bottom:1px solid var(--line); }
 .grp:first-child { margin-top:0; }
@@ -142,12 +144,7 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
 
 <div class="hd">
   <div>
-    <h1>Civil Engineering Government Job Tracker</h1>
-    <div class="sub">
-      <span class="scope">Central Govt</span><span class="scope">PSUs</span><span class="scope">Karnataka</span>
-      Open vacancies a B.E./B.Tech Civil fresher can apply to &mdash; Civil-specific posts and
-      branch-agnostic ones (defence officer entries, any-engineering and any-degree roles).
-    </div>
+    <h1>Anush Job Tracker</h1>
   </div>
   <button id="theme" type="button">&#9788; Light</button>
 </div>
@@ -177,6 +174,7 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
 
 <input id="q" type="search" placeholder="Search organization, post, location&hellip;" autocomplete="off">
 <div class="count" id="count"></div>
+<div class="sync" id="sync"></div>
 
 <div id="tblwrap"></div>
 <div id="cards"></div>
@@ -192,13 +190,6 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
   <thead><tr><th style="width:104px">Date</th><th style="width:60px">New</th><th style="width:60px">Total</th><th>Organizations added</th><th style="width:142px">Timestamp</th></tr></thead>
   <tbody id="logbody"></tbody>
 </table>
-
-<div class="note">
-  <strong>Inclusion rules:</strong> open to a B.E./B.Tech Civil graduate &middot; freshers eligible, no mandatory experience &middot;
-  applications currently open &middot; women-only posts excluded. Expired vacancies drop off automatically.
-  The official notification is the source of truth; always confirm on the official portal before applying.
-  <br><strong>Your marks</strong> (Applied / Not eligible / Not interested) are saved in this browser.
-</div>
 
 <script id="tracker-data" type="application/json">
 {
@@ -953,6 +944,36 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
   var STATUSES=[{v:"",label:"— Not marked"},{v:"applied",label:"Applied"},
                 {v:"not-eligible",label:"Not eligible"},{v:"not-interested",label:"Not interested"}];
   var marks={}; try { marks=JSON.parse(localStorage.getItem(STORE)||"{}"); } catch(e){ marks={}; }
+
+  // Marks live on the server so they follow Anush to any browser. localStorage is
+  // kept as a mirror: it renders instantly and keeps things working offline or if
+  // the API is not configured.
+  var saveTimer=null, syncEl=null;
+  function setSync(msg, cls){
+    if(!syncEl) return;
+    syncEl.textContent = msg || "";
+    syncEl.className = "sync" + (cls ? " " + cls : "");
+  }
+  function pushMarks(){
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function(){
+      setSync("Saving\u2026");
+      fetch("/api/marks", { method:"POST", headers:{"Content-Type":"application/json"},
+                            body: JSON.stringify(marks) })
+        .then(function(r){ setSync(r.ok ? "Saved" : "Saved on this device only", r.ok ? "" : "warn");
+                           if(r.ok) setTimeout(function(){ setSync(""); }, 1800); })
+        .catch(function(){ setSync("Saved on this device only", "warn"); });
+    }, 400);
+  }
+  function pullMarks(){
+    return fetch("/api/marks").then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){
+        if(d && typeof d==="object" && !d.error){
+          marks = d;
+          try { localStorage.setItem(STORE, JSON.stringify(marks)); } catch(e){}
+        }
+      }).catch(function(){});
+  }
   function keyOf(o,p){ return (o+"|"+p).toLowerCase().replace(/[^a-z0-9|]+/g,""); }
   function markOf(r){ return marks[keyOf(r.organization,r.post)]||""; }
   function isExpired(r){ return days(r.lastDate)<0; }
@@ -1125,10 +1146,13 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
     var k=el.getAttribute("data-key"), v=el.value;
     if(v) marks[k]=v; else delete marks[k];
     try{ localStorage.setItem(STORE,JSON.stringify(marks)); }catch(err){}
+    pushMarks();
     el.setAttribute("data-v",v); render();
   });
 
   render();
+  syncEl = document.getElementById("sync");
+  pullMarks().then(render);
   document.getElementById("asof").textContent =
     "Data as of "+fmt(DATA.asOf)+". Click a column heading to re-sort.";
 
