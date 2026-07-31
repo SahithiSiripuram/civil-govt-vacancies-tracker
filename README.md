@@ -4,7 +4,7 @@ A single-page tracker of **currently open Indian government job vacancies that a
 Engineering fresher can apply to** — Central Government, Public Sector Undertakings, and Karnataka
 state government and PSUs.
 
-**Live site:** _add your Vercel URL here after the first deploy_
+**Live site:** <https://civil-govt-vacancies-tracker.vercel.app>
 
 ## What it shows
 
@@ -97,6 +97,13 @@ source of truth.
 The tracker is refreshed daily at 12:00 AM IST by a scheduled Claude task, which searches official
 recruitment portals, appends newly opened vacancies, drops expired ones, re-sorts by deadline, and
 records a line in the daily update log at the bottom of the page.
+
+## Responsive layout
+
+Above 820px the page renders a sortable, searchable Grid.js table. Below that the table is swapped
+for stacked cards — deadline, status control, organization, post, eligibility tags and details —
+so the page never needs horizontal scrolling on a phone. Both views share one render path and one
+delegated change handler, so status marks and filters behave identically in either.
 
 ## Running locally
 
