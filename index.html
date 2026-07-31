@@ -3,135 +3,159 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>B.Tech Civil Government Job Vacancies Tracker</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/theme/mermaid.min.css" integrity="sha384-jZvDSsmGB9oGGT/4l9bHXGoAv1OxvG/cFmSo0dZaSqmBgvQTKDBFAMftlXTmMbNW" crossorigin="anonymous">
+<meta name="robots" content="noindex, nofollow">
+<title>Civil Engineering Government Job Tracker</title>
 <style>
-:root { color-scheme: light; }
+:root {
+  color-scheme: dark;
+  --bg:#12151a; --panel:#1a1f27; --panel2:#161a21; --line:#2a313c; --line2:#222933;
+  --tx:#e6eaf0; --tx2:#98a2b3; --tx3:#6e7885;
+  --accent:#6aa5e8; --accent2:#8fc0f5;
+  --ok-b:#14331f; --ok-t:#6ee7a0; --hot-b:#3a1a1c; --hot-t:#ff8f8f;
+  --warn:#e0a458; --any-b:#2a2140; --any-t:#c4a8f5; --civ-b:#152738; --civ-t:#7fb8ea;
+}
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg:#ffffff; --panel:#f7f9fc; --panel2:#fbfcfd; --line:#e3e9f0; --line2:#eef1f4;
+  --tx:#1a1a1a; --tx2:#5b6470; --tx3:#8b939d;
+  --accent:#1f4e79; --accent2:#1f4e79;
+  --ok-b:#e6f4ea; --ok-t:#1e6b3a; --hot-b:#fdecea; --hot-t:#b3261e;
+  --warn:#b3541e; --any-b:#f3ecfa; --any-t:#5b3a86; --civ-b:#eaf1f9; --civ-t:#1f4e79;
+}
 * { box-sizing: border-box; }
-body {
-  margin: 0; padding: 20px 22px 40px;
-  background: #ffffff; color: #1a1a1a;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 14px; line-height: 1.5;
+body { margin:0; padding:20px 22px 48px; background:var(--bg); color:var(--tx);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:14px; line-height:1.5; }
+a { color:var(--accent2); }
+.hd { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+h1 { font-size:20px; margin:0 0 4px; letter-spacing:-.01em; }
+.sub { color:var(--tx2); font-size:12.5px; margin-bottom:16px; }
+.scope { display:inline-block; background:var(--civ-b); color:var(--civ-t); border:1px solid var(--line);
+  border-radius:999px; padding:2px 10px; font-size:11.5px; font-weight:600; margin-right:6px; }
+#theme { background:var(--panel); color:var(--tx2); border:1px solid var(--line); border-radius:8px;
+  padding:6px 11px; font:inherit; font-size:12px; cursor:pointer; white-space:nowrap; }
+#theme:hover { border-color:var(--tx3); color:var(--tx); }
+.banner { background:var(--ok-b); color:var(--ok-t); border:1px solid var(--line);
+  border-radius:9px; padding:9px 13px; font-size:13px; font-weight:550; margin-bottom:14px; display:none; }
+.cards { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+.card { flex:1 1 150px; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+.card .n { font-size:22px; font-weight:650; color:var(--accent2); line-height:1.2; }
+.card .l { font-size:11.5px; color:var(--tx2); text-transform:uppercase; letter-spacing:.04em; margin-top:2px; }
+.card .h { font-size:11px; color:var(--tx3); margin-top:3px; }
+.card.warn .n { color:var(--warn); }
+.filters { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+.filters .lbl { font-size:11.5px; color:var(--tx2); }
+button.f { font:inherit; font-size:12px; font-weight:550; cursor:pointer; background:var(--panel);
+  color:var(--tx2); border:1px solid var(--line); border-radius:999px; padding:4px 13px; }
+button.f:hover { border-color:var(--tx3); color:var(--tx); }
+button.f[aria-pressed="true"] { background:var(--accent); color:#fff; border-color:var(--accent); }
+html[data-theme="light"] button.f[aria-pressed="true"] { color:#fff; }
+#q { background:var(--panel); border:1px solid var(--line); color:var(--tx); border-radius:8px;
+  padding:7px 11px; font:inherit; font-size:13px; width:260px; max-width:100%; margin-bottom:14px; }
+#q::placeholder { color:var(--tx3); }
+.count { font-size:12px; color:var(--tx2); margin-bottom:12px; }
+.grp { font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--tx2); margin:22px 0 9px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+.grp:first-child { margin-top:0; }
+.grp .gn { color:var(--tx3); font-weight:600; }
+.grp.hot { color:var(--hot-t); }
+table.t { border-collapse:collapse; width:100%; font-size:12.5px; }
+table.t th { background:var(--panel); color:var(--tx2); text-align:left; font-size:11px; font-weight:650;
+  text-transform:uppercase; letter-spacing:.03em; padding:9px 10px; border-bottom:1px solid var(--line);
+  cursor:pointer; user-select:none; white-space:nowrap; position:sticky; top:0; z-index:2; }
+table.t th:hover { color:var(--tx); }
+table.t th .ar { color:var(--tx3); font-size:9px; }
+table.t td { padding:10px; border-bottom:1px solid var(--line2); vertical-align:top; }
+table.t tr.dim td { opacity:.45; }
+table.t tr:hover td { background:var(--panel2); }
+.pill { display:inline-block; padding:1px 8px; border-radius:999px; font-size:11px; font-weight:600; white-space:nowrap; }
+.pill.yes { background:var(--ok-b); color:var(--ok-t); }
+.pill.hot { background:var(--hot-b); color:var(--hot-t); }
+.pill.ok  { background:var(--panel); color:var(--tx2); border:1px solid var(--line); }
+.pill.civil { background:var(--civ-b); color:var(--civ-t); }
+.pill.any { background:var(--any-b); color:var(--any-t); }
+.pill.exp { background:var(--panel); color:var(--tx3); }
+.pill.new { background:var(--ok-t); color:var(--bg); font-weight:700; letter-spacing:.03em; }
+html[data-theme="light"] .pill.new { background:#1e6b3a; color:#fff; }
+.cd { font-weight:650; font-size:12.5px; display:block; }
+.cd.hot { color:var(--hot-t); }
+.dt { color:var(--tx3); font-size:11px; }
+select.st { font:inherit; font-size:11.5px; width:100%; cursor:pointer; border:1px solid var(--line);
+  border-radius:6px; padding:4px 6px; background:var(--panel); color:var(--tx2); }
+select.st:hover { border-color:var(--tx3); }
+select.st[data-v="applied"] { background:var(--ok-b); color:var(--ok-t); border-color:var(--ok-t); font-weight:600; }
+select.st[data-v="not-eligible"] { background:var(--hot-b); color:var(--hot-t); }
+select.st[data-v="not-interested"] { opacity:.6; }
+#cards { display:none; }
+.vc { border:1px solid var(--line); border-radius:10px; padding:13px 14px; margin-bottom:10px; background:var(--panel2); }
+.vc.dim { opacity:.5; }
+.vc-top { display:flex; gap:10px; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.vc-top select.st { width:auto; max-width:52%; }
+.vc-org { font-size:12px; color:var(--tx2); }
+.vc-post { font-size:14.5px; font-weight:600; line-height:1.35; margin:2px 0 9px; }
+.vc-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+.vc dl { margin:0; display:grid; grid-template-columns:84px 1fr; gap:5px 10px; font-size:12.5px; }
+.vc dt { color:var(--tx3); }
+.vc dd { margin:0; }
+.vc-links { margin-top:11px; padding-top:10px; border-top:1px solid var(--line2); display:flex; gap:16px;
+  font-size:13px; font-weight:550; }
+details.cov { margin-top:28px; border:1px solid var(--line); border-radius:10px; background:var(--panel2); }
+details.cov > summary { cursor:pointer; padding:11px 14px; font-size:14px; font-weight:600; list-style:none; }
+details.cov > summary::-webkit-details-marker { display:none; }
+details.cov > summary::before { content:"\25B8 "; color:var(--tx3); }
+details.cov[open] > summary::before { content:"\25BE "; }
+.cov-body { padding:4px 14px 16px; }
+.cov-sum { font-size:12px; color:var(--tx2); margin-bottom:12px; }
+.cov-grp { font-size:11.5px; font-weight:700; color:var(--accent2); text-transform:uppercase;
+  letter-spacing:.04em; margin:16px 0 6px; }
+table.cov-t { border-collapse:collapse; width:100%; font-size:12px; }
+table.cov-t td { padding:4px 8px; border-bottom:1px solid var(--line2); vertical-align:top; }
+table.cov-t td:first-child { width:30%; font-weight:550; }
+table.cov-t td:nth-child(2) { width:104px; color:var(--tx3); white-space:nowrap; }
+.stale { color:var(--warn) !important; font-weight:600; }
+h2 { font-size:14.5px; margin:28px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+table.log { border-collapse:collapse; width:100%; font-size:12.5px; }
+table.log th, table.log td { border:1px solid var(--line); padding:7px 9px; text-align:left; vertical-align:top; }
+table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
+.note { font-size:11.5px; color:var(--tx3); margin-top:14px; line-height:1.65; }
+.empty { text-align:center; color:var(--tx3); padding:26px; border:1px dashed var(--line); border-radius:10px; }
+@media (max-width: 860px) {
+  body { padding:16px 14px 40px; font-size:15px; }
+  h1 { font-size:18px; }
+  #tblwrap { display:none; }
+  #cards { display:block; }
+  .card { flex:1 1 calc(50% - 6px); padding:10px 12px; }
+  .card .n { font-size:19px; }
+  .cards { gap:8px; }
+  button.f { padding:6px 14px; font-size:12.5px; }
+  select.st { font-size:13px; padding:5px 7px; }
+  #q { width:100%; }
+  .filters .lbl { width:100%; margin-bottom:1px; }
+  table.log { display:block; overflow-x:auto; white-space:nowrap; }
 }
-h1 { font-size: 20px; margin: 0 0 4px; letter-spacing: -0.01em; }
-.sub { color: #5b6470; font-size: 12.5px; margin-bottom: 18px; }
-.scope { display:inline-block; background:#eef4fb; color:#1f4e79; border:1px solid #cfe0f2;
-  border-radius: 999px; padding: 2px 10px; font-size: 11.5px; font-weight: 600; margin-right:6px;}
-.cards { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
-.card { flex: 1 1 150px; background: #f7f9fc; border: 1px solid #e3e9f0; border-radius: 10px; padding: 12px 14px; }
-.card .n { font-size: 22px; font-weight: 650; color: #1f4e79; line-height: 1.2; }
-.card .l { font-size: 11.5px; color: #5b6470; text-transform: uppercase; letter-spacing: .04em; margin-top: 2px; }
-.card .h { font-size: 11px; color: #8b939d; margin-top: 3px; }
-.card.warn .n { color: #b3541e; }
-h2 { font-size: 14.5px; margin: 26px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #e6eaee; }
-.filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
-.filters .lbl { font-size: 11.5px; color: #6b7480; margin-right: 2px; }
-button.f {
-  font: inherit; font-size: 12px; font-weight: 550; cursor: pointer;
-  background: #fff; color: #41505f; border: 1px solid #d7dee6;
-  border-radius: 999px; padding: 4px 13px;
-}
-button.f:hover { border-color: #9fb4c9; }
-button.f[aria-pressed="true"] { background: #1f4e79; color: #fff; border-color: #1f4e79; }
-#grid { margin-bottom: 8px; }
-.gridjs-table { font-size: 12.5px; }
-.gridjs-th { background: #1f4e79 !important; color: #fff !important; font-size: 11.5px !important; }
-.gridjs-th-content { white-space: normal; }
-.gridjs-td { vertical-align: top !important; }
-.gridjs-wrapper { box-shadow: none; border: 1px solid #e3e9f0; }
-a { color: #1f4e79; }
-.pill { display:inline-block; padding:1px 7px; border-radius:999px; font-size:11px; font-weight:600; white-space:nowrap; }
-.pill.yes { background:#e6f4ea; color:#1e6b3a; }
-.pill.soon { background:#fdecea; color:#b3261e; }
-.pill.ok { background:#eef2f6; color:#41505f; }
-.pill.civil { background:#eaf1f9; color:#1f4e79; }
-.pill.any { background:#f3ecfa; color:#5b3a86; }
-.pill.expired { background:#eceff2; color:#77818c; }
-select.st {
-  font: inherit; font-size: 11.5px; width: 100%; cursor: pointer;
-  border: 1px solid #d7dee6; border-radius: 6px; padding: 3px 5px;
-  background: #fff; color: #41505f;
-}
-select.st:hover { border-color: #9fb4c9; }
-select.st[data-v="applied"] { background:#e6f4ea; border-color:#a8d5b8; color:#1e6b3a; font-weight:600; }
-select.st[data-v="not-eligible"] { background:#fdecea; border-color:#f0bdb7; color:#b3261e; }
-select.st[data-v="not-interested"] { background:#f4f5f7; border-color:#dde1e6; color:#77818c; }
-.gridjs-tr.dim .gridjs-td { opacity: .5; }
-/* ---- Card view: used on narrow screens instead of the wide table ---- */
-#cards { display: none; }
-.vc { border: 1px solid #e3e9f0; border-radius: 10px; padding: 13px 14px; margin-bottom: 10px; background: #fff; }
-.vc.dim { opacity: .55; }
-.vc-top { display: flex; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-.vc-top select.st { width: auto; max-width: 55%; }
-.vc-org { font-size: 12px; color: #5b6470; }
-.vc-post { font-size: 14px; font-weight: 600; line-height: 1.35; margin: 1px 0 8px; }
-.vc-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-.vc dl { margin: 0; display: grid; grid-template-columns: 88px 1fr; gap: 5px 10px; font-size: 12.5px; }
-.vc dt { color: #77818c; }
-.vc dd { margin: 0; }
-.vc-links { margin-top: 11px; padding-top: 10px; border-top: 1px solid #eef1f4; display: flex; gap: 16px; font-size: 13px; font-weight: 550; }
-.count { font-size: 12px; color: #6b7480; margin-bottom: 10px; }
-
-@media (max-width: 820px) {
-  body { padding: 16px 14px 36px; font-size: 15px; }
-  h1 { font-size: 18px; }
-  #grid { display: none; }
-  #cards { display: block; }
-  .card { flex: 1 1 calc(50% - 6px); padding: 10px 12px; }
-  .card .n { font-size: 19px; }
-  .cards { gap: 8px; }
-  button.f { padding: 6px 14px; font-size: 12.5px; }
-  select.st { font-size: 13px; padding: 5px 7px; }
-  .filters { gap: 6px; }
-  .filters .lbl { width: 100%; margin-bottom: 1px; }
-  table.log { display: block; overflow-x: auto; white-space: nowrap; }
-}
-@media (max-width: 380px) {
-  .vc dl { grid-template-columns: 1fr; gap: 1px 0; }
-  .vc dt { margin-top: 5px; }
-}
-
-
-/* ---- Source coverage ---- */
-details.cov { margin-top: 26px; border: 1px solid #e3e9f0; border-radius: 10px; padding: 0; background: #fbfcfd; }
-details.cov > summary { cursor: pointer; padding: 11px 14px; font-size: 14px; font-weight: 600; list-style: none; }
-details.cov > summary::-webkit-details-marker { display: none; }
-details.cov > summary::before { content: "\25B8 "; color: #77818c; }
-details.cov[open] > summary::before { content: "\25BE "; }
-.cov-body { padding: 4px 14px 14px; }
-.cov-sum { font-size: 12px; color: #6b7480; margin-bottom: 12px; }
-.cov-grp { font-size: 11.5px; font-weight: 700; color: #1f4e79; text-transform: uppercase;
-  letter-spacing: .04em; margin: 14px 0 6px; }
-table.cov-t { border-collapse: collapse; width: 100%; font-size: 12px; }
-table.cov-t td { padding: 4px 8px; border-bottom: 1px solid #eef1f4; vertical-align: top; }
-table.cov-t td:first-child { width: 30%; font-weight: 550; }
-table.cov-t td:nth-child(2) { width: 108px; color: #77818c; white-space: nowrap; }
-.stale { color: #b3541e !important; font-weight: 600; }
-@media (max-width: 820px) {
-  table.cov-t td:first-child { width: 45%; }
-  table.cov-t td:nth-child(2) { width: 84px; font-size: 11px; }
-}
-
-table.log { border-collapse: collapse; width: 100%; font-size: 12.5px; }
-table.log th, table.log td { border: 1px solid #e3e9f0; padding: 7px 9px; text-align: left; vertical-align: top; }
-table.log th { background: #f7f9fc; font-weight: 600; color: #41505f; }
-.note { font-size: 11.5px; color: #6b7480; margin-top: 14px; line-height: 1.6; }
+@media (max-width: 380px) { .vc dl { grid-template-columns:1fr; gap:1px 0; } .vc dt { margin-top:5px; } }
 </style>
 </head>
 <body>
 
-<h1>B.Tech Civil Government Job Vacancies Tracker</h1>
-<div class="sub">
-  <span class="scope">Central Govt</span><span class="scope">PSUs</span><span class="scope">Karnataka</span>
-  Open government vacancies you can apply to as a B.E./B.Tech Civil fresher — both Civil-specific posts and
-  branch-agnostic ones (defence officer entries, any-engineering and any-degree roles).
+<div class="hd">
+  <div>
+    <h1>Civil Engineering Government Job Tracker</h1>
+    <div class="sub">
+      <span class="scope">Central Govt</span><span class="scope">PSUs</span><span class="scope">Karnataka</span>
+      Open vacancies a B.E./B.Tech Civil fresher can apply to &mdash; Civil-specific posts and
+      branch-agnostic ones (defence officer entries, any-engineering and any-degree roles).
+    </div>
+  </div>
+  <button id="theme" type="button">&#9788; Light</button>
 </div>
 
+<div class="banner" id="banner"></div>
+
 <div class="cards">
-  <div class="card"><div class="n" id="c-notif">0</div><div class="l">Open notifications</div><div class="h">rows in the table below</div></div>
-  <div class="card"><div class="n" id="c-seats">0</div><div class="l">Total seats</div><div class="h">vacancies summed across rows</div></div>
-  <div class="card warn"><div class="n" id="c-week">0</div><div class="l">Closing in 7 days</div><div class="h">deadline within a week</div></div>
+  <div class="card"><div class="n" id="c-notif">0</div><div class="l">Open notifications</div><div class="h">listed below</div></div>
+  <div class="card"><div class="n" id="c-seats">0</div><div class="l">Total seats</div><div class="h">summed across them</div></div>
+  <div class="card warn"><div class="n" id="c-week">0</div><div class="l">Closing in 7 days</div><div class="h">act on these first</div></div>
   <div class="card"><div class="n" id="c-org">0</div><div class="l">Organizations</div><div class="h">distinct recruiters</div></div>
 </div>
 
@@ -139,7 +163,7 @@ table.log th { background: #f7f9fc; font-weight: 600; color: #41505f; }
   <span class="lbl">Eligibility:</span>
   <button class="f" data-filter="all" aria-pressed="true">All</button>
   <button class="f" data-filter="Civil-specific" aria-pressed="false">Civil-specific</button>
-  <button class="f" data-filter="Any branch" aria-pressed="false">Any branch / any degree</button>
+  <button class="f" data-filter="Any branch" aria-pressed="false">Any branch</button>
 </div>
 <div class="filters">
   <span class="lbl">Status:</span>
@@ -149,33 +173,29 @@ table.log th { background: #f7f9fc; font-weight: 600; color: #41505f; }
   <button class="s" data-status="dismissed" aria-pressed="false">Dismissed</button>
 </div>
 
+<input id="q" type="search" placeholder="Search organization, post, location&hellip;" autocomplete="off">
 <div class="count" id="count"></div>
-<div id="grid"></div>
+
+<div id="tblwrap"></div>
 <div id="cards"></div>
 <div class="note" id="asof"></div>
 
-
 <details class="cov">
   <summary>Source coverage &mdash; <span id="cov-count">0</span> organizations</summary>
-  <div class="cov-body">
-    <div class="cov-sum" id="cov-sum"></div>
-    <div id="cov-list"></div>
-  </div>
+  <div class="cov-body"><div class="cov-sum" id="cov-sum"></div><div id="cov-list"></div></div>
 </details>
 
 <h2>Daily update log</h2>
 <table class="log">
-  <thead><tr><th style="width:110px">Date</th><th style="width:70px">New</th><th style="width:70px">Total</th><th>Organizations added</th><th style="width:150px">Timestamp</th></tr></thead>
+  <thead><tr><th style="width:104px">Date</th><th style="width:60px">New</th><th style="width:60px">Total</th><th>Organizations added</th><th style="width:142px">Timestamp</th></tr></thead>
   <tbody id="logbody"></tbody>
 </table>
 
 <div class="note">
-  <strong>Inclusion rules:</strong> open to a B.E./B.Tech Civil graduate — either explicitly Civil, or open to any engineering branch / any degree ·
-  no mandatory work experience (freshers eligible) · applications currently open · women-only posts excluded.
-  Vacancies whose closing date has passed drop off the list automatically. The official recruitment notification is the source of truth where sources conflict.
-  Always confirm details on the official portal before applying.
-  <br><strong>Status column:</strong> mark each row Applied / Not eligible / Not interested — your marks are saved in this browser only
-  (they are not shared, and won't follow you to another device). <em>Expired</em> is set automatically once a deadline passes.
+  <strong>Inclusion rules:</strong> open to a B.E./B.Tech Civil graduate &middot; freshers eligible, no mandatory experience &middot;
+  applications currently open &middot; women-only posts excluded. Expired vacancies drop off automatically.
+  The official notification is the source of truth; always confirm on the official portal before applying.
+  <br><strong>Your marks</strong> (Applied / Not eligible / Not interested) are saved in this browser.
 </div>
 
 <script id="tracker-data" type="application/json">
@@ -890,270 +910,255 @@ table.log th { background: #f7f9fc; font-weight: 600; color: #41505f; }
 }
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/gridjs.umd.js" integrity="sha384-/XXDzxe4FsGiAe50i/u9pY/Vy/uX654MHB1xoc1BJNnH1WXHhqHga9g3q5tF4gj7" crossorigin="anonymous"></script>
 <script>
 (function () {
   var DATA = JSON.parse(document.getElementById("tracker-data").textContent);
   var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var today = new Date(DATA.asOf + "T00:00:00");
-  var grid = null;
 
-  function fmt(iso) {
-    if (!iso) return "";
-    var p = iso.split("-");
-    return p[2] + "-" + MON[parseInt(p[1], 10) - 1] + "-" + p[0];
-  }
-  function esc(s) {
-    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
-    });
-  }
-  function days(iso) {
-    return Math.round((new Date(iso + "T00:00:00") - today) / 86400000);
-  }
+  function fmt(iso){ if(!iso) return ""; var p=iso.split("-"); return p[2]+"-"+MON[+p[1]-1]+"-"+p[0]; }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function days(iso){ return Math.round((new Date(iso+"T00:00:00")-today)/864e5); }
 
-  var all = DATA.vacancies.slice().sort(function (a, b) {
-    return a.lastDate === b.lastDate
-      ? a.organization.localeCompare(b.organization)
-      : a.lastDate.localeCompare(b.lastDate);
+  // "in 2 days" beats a bare date — it's the number you act on.
+  function countdown(iso){
+    var d = days(iso);
+    if (d < 0)  return "Closed";
+    if (d === 0) return "Closes today";
+    if (d === 1) return "Closes tomorrow";
+    if (d < 14)  return "in " + d + " days";
+    if (d < 60)  return "in " + Math.round(d/7) + " weeks";
+    return "in " + Math.round(d/30) + " months";
+  }
+  function bucket(iso){ var d=days(iso); return d<=7?0:(d<=30?1:2); }
+  var BUCKETS = ["Closing this week","Closing this month","Later"];
+
+  // ---- theme ----
+  var THEME="civilTracker.theme";
+  function applyTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    document.getElementById("theme").innerHTML = t==="light" ? "&#9789; Dark" : "&#9788; Light";
+  }
+  applyTheme(localStorage.getItem(THEME) || "dark");
+  document.getElementById("theme").addEventListener("click", function(){
+    var t = document.documentElement.getAttribute("data-theme")==="light" ? "dark" : "light";
+    localStorage.setItem(THEME, t); applyTheme(t);
   });
 
-  // ---- Your status marks, saved in this browser (localStorage) ----------------
-  var STORE = "civilTrackerStatus.v1";
-  var STATUSES = [
-    { v: "", label: "— Not marked" },
-    { v: "applied", label: "Applied" },
-    { v: "not-eligible", label: "Not eligible" },
-    { v: "not-interested", label: "Not interested" }
-  ];
-  var marks = {};
-  try { marks = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { marks = {}; }
+  // ---- status marks ----
+  var STORE="civilTrackerStatus.v1";
+  var STATUSES=[{v:"",label:"— Not marked"},{v:"applied",label:"Applied"},
+                {v:"not-eligible",label:"Not eligible"},{v:"not-interested",label:"Not interested"}];
+  var marks={}; try { marks=JSON.parse(localStorage.getItem(STORE)||"{}"); } catch(e){ marks={}; }
+  function keyOf(o,p){ return (o+"|"+p).toLowerCase().replace(/[^a-z0-9|]+/g,""); }
+  function markOf(r){ return marks[keyOf(r.organization,r.post)]||""; }
+  function isExpired(r){ return days(r.lastDate)<0; }
 
-  // Stable per-vacancy key: survives edits to qualification/salary/link text.
-  function keyOf(org, post) {
-    return (org + "|" + post).toLowerCase().replace(/[^a-z0-9|]+/g, "");
-  }
-  function markOf(r) { return marks[keyOf(r.organization, r.post)] || ""; }
-  function setMark(k, v) {
-    if (v) { marks[k] = v; } else { delete marks[k]; }
-    try { localStorage.setItem(STORE, JSON.stringify(marks)); } catch (e) {}
-  }
-  function labelOf(v) {
-    for (var i = 0; i < STATUSES.length; i++) if (STATUSES[i].v === v) return STATUSES[i].label;
-    return "— Not marked";
-  }
-  // Expired is derived from the deadline, never chosen by hand.
-  function isExpired(r) { return days(r.lastDate) < 0; }
-  function statusText(r) { return isExpired(r) ? "Expired" : labelOf(markOf(r)); }
+  // ---- new since last visit ----
+  var SEEN="civilTracker.lastSeen";
+  var lastSeen = localStorage.getItem(SEEN) || "";
+  function isNew(r){ return !lastSeen || r.dateAdded > lastSeen; }
 
-  function toRows(list) {
-    return list.map(function (r) {
-      return [r.lastDate, statusText(r), r.organization, r.post, r.eligibility || "Civil-specific",
-              r.qualification, r.freshers, r.vacancies, r.location, r.salary,
-              "", r.applyLink, r.notificationLink];
+  var all = DATA.vacancies.slice().sort(function(a,b){
+    return a.lastDate===b.lastDate ? a.organization.localeCompare(b.organization)
+                                   : a.lastDate.localeCompare(b.lastDate); });
+
+  var freshCount = all.filter(isNew).length;
+  if (lastSeen && freshCount) {
+    var b=document.getElementById("banner");
+    b.textContent = freshCount + (freshCount===1?" new vacancy":" new vacancies") + " since your last visit";
+    b.style.display="block";
+  }
+
+  var elig="all", stat="all", query="", sortKey="lastDate", sortAsc=true;
+
+  function visible(){
+    return all.filter(function(r){
+      if (elig!=="all" && (r.eligibility||"Civil-specific")!==elig) return false;
+      var m=markOf(r), exp=isExpired(r);
+      if (stat==="applied" && m!=="applied") return false;
+      if (stat==="dismissed" && !(m==="not-eligible"||m==="not-interested"||exp)) return false;
+      if (stat==="open" && (exp||m==="applied"||m==="not-eligible"||m==="not-interested")) return false;
+      if (query) {
+        var hay=(r.organization+" "+r.post+" "+r.location+" "+r.qualification+" "+r.eligibility).toLowerCase();
+        if (hay.indexOf(query)<0) return false;
+      }
+      return true;
+    }).sort(function(a,b){
+      var x=a[sortKey], y=b[sortKey];
+      if (sortKey==="vacancies"){ x=seats(a); y=seats(b); }
+      if (x===y) return a.organization.localeCompare(b.organization);
+      var c = (typeof x==="number") ? x-y : String(x).localeCompare(String(y));
+      return sortAsc?c:-c;
     });
   }
 
-  // "1,654 (Civil dept, of 4,098 total)" -> 1654. Only the leading figure counts;
-  // anything in parentheses is context, not extra seats.
-  function seatCount(v) {
-    var m = String(v).split("(")[0].match(/[\d,]+/);
-    return m ? parseInt(m[0].replace(/,/g, ""), 10) : NaN;
+  // Only the leading figure counts; anything in parentheses is context.
+  function seats(r){ var m=String(r.vacancies).split("(")[0].match(/[\d,]+/);
+    return m?parseInt(m[0].replace(/,/g,""),10):0; }
+
+  function stats(list){
+    var s=0, soon=0, orgs={};
+    list.forEach(function(r){ s+=seats(r); orgs[r.organization]=1;
+      var d=days(r.lastDate); if(d>=0&&d<=7) soon++; });
+    document.getElementById("c-notif").textContent=list.length;
+    document.getElementById("c-seats").textContent=s.toLocaleString("en-IN");
+    document.getElementById("c-week").textContent=soon;
+    document.getElementById("c-org").textContent=Object.keys(orgs).length;
   }
 
-  function stats(list) {
-    var seats = 0, soon = 0, orgs = {};
-    list.forEach(function (r) {
-      var n = seatCount(r.vacancies);
-      if (!isNaN(n)) seats += n;
-      orgs[r.organization] = 1;
-      var d = days(r.lastDate);
-      if (d >= 0 && d <= 7) soon++;
+  function selectHtml(r){
+    if (isExpired(r)) return '<span class="pill exp">Expired</span>';
+    var k=keyOf(r.organization,r.post), cur=marks[k]||"";
+    return '<select class="st" data-key="'+k+'" data-v="'+cur+'" aria-label="Status">'+
+      STATUSES.map(function(s){ return '<option value="'+s.v+'"'+(s.v===cur?" selected":"")+">"+s.label+"</option>"; }).join("")+
+      "</select>";
+  }
+  function badges(r){
+    var el=r.eligibility||"Civil-specific";
+    return '<span class="pill '+(el==="Any branch"?"any":"civil")+'">'+esc(el)+"</span>"+
+           (isNew(r)?' <span class="pill new">NEW</span>':"");
+  }
+  function dimmed(r){ var m=markOf(r); return isExpired(r)||m==="not-eligible"||m==="not-interested"; }
+
+  var COLS=[["Closes","lastDate"],["Status",null],["Organization","organization"],["Post","post"],
+            ["Open to","eligibility"],["Eligibility & age","qualification"],["Seats","vacancies"],
+            ["Location","location"],["Pay","salary"],["Links",null]];
+
+  function renderTable(list){
+    if(!list.length){ document.getElementById("tblwrap").innerHTML='<div class="empty">Nothing matches these filters.</div>'; return; }
+    var head="<tr>"+COLS.map(function(c){
+      var ar = c[1]===sortKey ? '<span class="ar">'+(sortAsc?"▲":"▼")+"</span>" : "";
+      return "<th"+(c[1]?' data-k="'+c[1]+'"':"")+">"+esc(c[0])+" "+ar+"</th>"; }).join("")+"</tr>";
+    var body="", last=-1;
+    list.forEach(function(r){
+      var bk=bucket(r.lastDate);
+      if (bk!==last && sortKey==="lastDate" && sortAsc){
+        body+='<tr><td colspan="10" style="border:0;padding:0"><div class="grp'+(bk===0?" hot":"")+'">'+
+              BUCKETS[bk]+' <span class="gn">'+list.filter(function(x){return bucket(x.lastDate)===bk;}).length+"</span></div></td></tr>";
+        last=bk;
+      }
+      var d=days(r.lastDate);
+      body+='<tr class="'+(dimmed(r)?"dim":"")+'">'+
+        '<td><span class="cd'+(d<=7?" hot":"")+'">'+countdown(r.lastDate)+'</span><span class="dt">'+fmt(r.lastDate)+"</span></td>"+
+        "<td>"+selectHtml(r)+"</td>"+
+        "<td>"+esc(r.organization)+"</td>"+
+        "<td>"+esc(r.post)+"</td>"+
+        "<td>"+badges(r)+"</td>"+
+        "<td>"+esc(r.qualification)+"</td>"+
+        "<td>"+esc(r.vacancies)+"</td>"+
+        "<td>"+esc(r.location)+"</td>"+
+        "<td>"+esc(r.salary)+"</td>"+
+        '<td><a href="'+esc(r.applyLink)+'" target="_blank" rel="noopener">Apply</a><br>'+
+        '<a href="'+esc(r.notificationLink)+'" target="_blank" rel="noopener">Notice</a></td></tr>';
     });
-    document.getElementById("c-notif").textContent = list.length;
-    document.getElementById("c-seats").textContent = seats.toLocaleString("en-IN");
-    document.getElementById("c-week").textContent = soon;
-    document.getElementById("c-org").textContent = Object.keys(orgs).length;
+    document.getElementById("tblwrap").innerHTML='<table class="t"><thead>'+head+"</thead><tbody>"+body+"</tbody></table>";
   }
 
-  var html = gridjs.html;
-  var columns = [
-    { name: "Last Date", width: "104px", formatter: function (cell) {
-        var d = days(cell);
-        return html('<span class="pill ' + (d <= 7 ? "soon" : "ok") + '">' + fmt(cell) + "</span>");
-      } },
-    { name: "Status", width: "132px", formatter: function (cell, row) {
-        if (cell === "Expired") return html('<span class="pill expired">Expired</span>');
-        var k = keyOf(row.cells[2].data, row.cells[3].data);
-        var cur = marks[k] || "";
-        var opts = STATUSES.map(function (s) {
-          return '<option value="' + s.v + '"' + (s.v === cur ? " selected" : "") + ">" + s.label + "</option>";
-        }).join("");
-        return html('<select class="st" data-key="' + k + '" data-v="' + cur + '">' + opts + "</select>");
-      } },
-    { name: "Organization", width: "180px" },
-    { name: "Post", width: "205px" },
-    { name: "Open to", width: "108px", formatter: function (c) {
-        return html('<span class="pill ' + (c === "Any branch" ? "any" : "civil") + '">' + esc(c) + "</span>");
-      } },
-    { name: "Qualification", width: "240px" },
-    { name: "Freshers", width: "84px", formatter: function (c) {
-        return html('<span class="pill yes">' + esc(c) + "</span>");
-      } },
-    { name: "Vacancies", width: "116px" },
-    { name: "Location", width: "150px" },
-    { name: "Salary / Pay Level", width: "165px" },
-    { name: "Links", width: "118px", sort: false, formatter: function (_, row) {
-        return html(
-          '<a href="' + esc(row.cells[11].data) + '" target="_blank" rel="noopener">Apply</a> &middot; ' +
-          '<a href="' + esc(row.cells[12].data) + '" target="_blank" rel="noopener">Notification</a>'
-        );
-      } },
-    { name: "applyLink", hidden: true },
-    { name: "notificationLink", hidden: true }
-  ];
-
-  function selectHtml(r) {
-    if (isExpired(r)) return '<span class="pill expired">Expired</span>';
-    var k = keyOf(r.organization, r.post), cur = marks[k] || "";
-    return '<select class="st" data-key="' + k + '" data-v="' + cur + '" aria-label="Status">' +
-      STATUSES.map(function (s) {
-        return '<option value="' + s.v + '"' + (s.v === cur ? " selected" : "") + ">" + s.label + "</option>";
-      }).join("") + "</select>";
+  function renderCards(list){
+    if(!list.length){ document.getElementById("cards").innerHTML='<div class="empty">Nothing matches these filters.</div>'; return; }
+    var out="", last=-1;
+    list.forEach(function(r){
+      var bk=bucket(r.lastDate);
+      if (bk!==last && sortKey==="lastDate" && sortAsc){
+        out+='<div class="grp'+(bk===0?" hot":"")+'">'+BUCKETS[bk]+' <span class="gn">'+
+             list.filter(function(x){return bucket(x.lastDate)===bk;}).length+"</span></div>";
+        last=bk;
+      }
+      var d=days(r.lastDate);
+      out+='<article class="vc'+(dimmed(r)?" dim":"")+'">'+
+        '<div class="vc-top"><span class="pill '+(d<=7?"hot":"ok")+'">'+countdown(r.lastDate)+"</span>"+selectHtml(r)+"</div>"+
+        '<div class="vc-org">'+esc(r.organization)+"</div>"+
+        '<div class="vc-post">'+esc(r.post)+"</div>"+
+        '<div class="vc-tags">'+badges(r)+'<span class="pill yes">Freshers: '+esc(r.freshers)+"</span></div>"+
+        "<dl><dt>Closes</dt><dd>"+fmt(r.lastDate)+"</dd>"+
+        "<dt>Seats</dt><dd>"+esc(r.vacancies)+"</dd>"+
+        "<dt>Location</dt><dd>"+esc(r.location)+"</dd>"+
+        "<dt>Pay</dt><dd>"+esc(r.salary)+"</dd>"+
+        "<dt>Eligibility</dt><dd>"+esc(r.qualification)+"</dd></dl>"+
+        '<div class="vc-links"><a href="'+esc(r.applyLink)+'" target="_blank" rel="noopener">Apply &rarr;</a>'+
+        '<a href="'+esc(r.notificationLink)+'" target="_blank" rel="noopener">Notification &rarr;</a></div></article>';
+    });
+    document.getElementById("cards").innerHTML=out;
   }
 
-  function renderCards(list) {
-    if (!list.length) {
-      document.getElementById("cards").innerHTML =
-        '<div class="vc" style="text-align:center;color:#77818c">Nothing matches these filters.</div>';
-      return;
-    }
-    document.getElementById("cards").innerHTML = list.map(function (r) {
-      var d = days(r.lastDate), m = markOf(r);
-      var dim = isExpired(r) || m === "not-eligible" || m === "not-interested";
-      var el = r.eligibility || "Civil-specific";
-      return '<article class="vc' + (dim ? " dim" : "") + '">' +
-        '<div class="vc-top"><span class="pill ' + (d <= 7 ? "soon" : "ok") + '">' + fmt(r.lastDate) +
-          "</span>" + selectHtml(r) + "</div>" +
-        '<div class="vc-org">' + esc(r.organization) + "</div>" +
-        '<div class="vc-post">' + esc(r.post) + "</div>" +
-        '<div class="vc-tags"><span class="pill ' + (el === "Any branch" ? "any" : "civil") + '">' + esc(el) +
-          '</span><span class="pill yes">Freshers: ' + esc(r.freshers) + "</span></div>" +
-        "<dl>" +
-          "<dt>Vacancies</dt><dd>" + esc(r.vacancies) + "</dd>" +
-          "<dt>Location</dt><dd>" + esc(r.location) + "</dd>" +
-          "<dt>Pay</dt><dd>" + esc(r.salary) + "</dd>" +
-          "<dt>Eligibility</dt><dd>" + esc(r.qualification) + "</dd>" +
-        "</dl>" +
-        '<div class="vc-links"><a href="' + esc(r.applyLink) + '" target="_blank" rel="noopener">Apply &rarr;</a>' +
-          '<a href="' + esc(r.notificationLink) + '" target="_blank" rel="noopener">Notification &rarr;</a></div>' +
-        "</article>";
-    }).join("");
-  }
-
-  function render(list) {
-    stats(list);
-    renderCards(list);
+  function render(){
+    var list=visible();
+    stats(list); renderTable(list); renderCards(list);
     document.getElementById("count").textContent =
-      list.length + (list.length === 1 ? " vacancy" : " vacancies") + " shown, earliest deadline first";
-    if (grid) {
-      grid.updateConfig({ data: toRows(list) }).forceRender();
-    } else {
-      grid = new gridjs.Grid({
-        columns: columns,
-        data: toRows(list),
-        sort: true,
-        search: true,
-        fixedHeader: true,
-        style: { table: { "white-space": "normal" } }
-      });
-      grid.render(document.getElementById("grid"));
-    }
+      list.length+(list.length===1?" vacancy":" vacancies")+
+      (list.length!==all.length?" of "+all.length:"")+" · soonest deadline first";
   }
 
-  var elig = "all", stat = "all";
-
-  function visible() {
-    return all.filter(function (r) {
-      if (elig !== "all" && (r.eligibility || "Civil-specific") !== elig) return false;
-      if (stat === "all") return true;
-      var m = markOf(r), exp = isExpired(r);
-      if (stat === "applied") return m === "applied";
-      if (stat === "dismissed") return m === "not-eligible" || m === "not-interested" || exp;
-      // "To act on": still open and not yet dealt with.
-      return !exp && m !== "applied" && m !== "not-eligible" && m !== "not-interested";
-    });
-  }
-  function refresh() { render(visible()); }
-
-  function wire(sel, attr, set) {
-    Array.prototype.forEach.call(document.querySelectorAll(sel), function (btn) {
-      btn.addEventListener("click", function () {
-        Array.prototype.forEach.call(document.querySelectorAll(sel), function (b) {
-          b.setAttribute("aria-pressed", b === btn ? "true" : "false");
-        });
-        set(btn.getAttribute(attr));
-        refresh();
+  function wire(sel,attr,set){
+    Array.prototype.forEach.call(document.querySelectorAll(sel),function(b){
+      b.addEventListener("click",function(){
+        Array.prototype.forEach.call(document.querySelectorAll(sel),function(x){
+          x.setAttribute("aria-pressed", x===b?"true":"false"); });
+        set(b.getAttribute(attr)); render();
       });
     });
   }
-  wire("button.f", "data-filter", function (v) { elig = v; });
-  wire("button.s", "data-status", function (v) { stat = v; });
+  wire("button.f","data-filter",function(v){ elig=v; });
+  wire("button.s","data-status",function(v){ stat=v; });
 
-  // Both views rebuild their DOM on every render, so delegate from the document.
-  document.addEventListener("change", function (e) {
-    var el = e.target;
-    if (!el || !el.classList || !el.classList.contains("st")) return;
-    setMark(el.getAttribute("data-key"), el.value);
-    el.setAttribute("data-v", el.value);
-    refresh();
+  var qt;
+  document.getElementById("q").addEventListener("input",function(e){
+    clearTimeout(qt); var v=e.target.value.toLowerCase().trim();
+    qt=setTimeout(function(){ query=v; render(); },120);
   });
 
-  render(all);
+  document.addEventListener("click",function(e){
+    var th=e.target.closest && e.target.closest("th[data-k]");
+    if(!th) return;
+    var k=th.getAttribute("data-k");
+    if(k===sortKey) sortAsc=!sortAsc; else { sortKey=k; sortAsc=true; }
+    render();
+  });
+
+  document.addEventListener("change",function(e){
+    var el=e.target;
+    if(!el.classList||!el.classList.contains("st")) return;
+    var k=el.getAttribute("data-key"), v=el.value;
+    if(v) marks[k]=v; else delete marks[k];
+    try{ localStorage.setItem(STORE,JSON.stringify(marks)); }catch(err){}
+    el.setAttribute("data-v",v); render();
+  });
+
+  render();
   document.getElementById("asof").textContent =
-    "Data as of " + fmt(DATA.asOf) + ". Click a column header to re-sort, or use the search box above the table.";
+    "Data as of "+fmt(DATA.asOf)+". Click a column heading to re-sort.";
 
-
-  // ---- Source coverage: what was checked, and when ----
-  (function () {
-    var src = DATA.sources || [];
-    if (!src.length) return;
-    document.getElementById("cov-count").textContent = src.length;
-    var todayCount = 0, never = 0;
-    src.forEach(function (s) {
-      if (s.lastChecked === DATA.asOf) todayCount++;
-      if (!s.lastChecked) never++;
-    });
+  // coverage
+  (function(){
+    var src=DATA.sources||[]; if(!src.length) return;
+    document.getElementById("cov-count").textContent=src.length;
+    var t=0,n=0;
+    src.forEach(function(s){ if(s.lastChecked===DATA.asOf) t++; if(!s.lastChecked) n++; });
     document.getElementById("cov-sum").textContent =
-      todayCount + " of " + src.length + " checked on " + fmt(DATA.asOf) +
-      (never ? " \u00b7 " + never + " not yet checked" : " \u00b7 all sources covered");
-
-    var order = ["Central", "Defence", "PSU", "Banking/Finance", "Karnataka"];
-    var groups = {};
-    src.forEach(function (s) { (groups[s.category] = groups[s.category] || []).push(s); });
-
-    document.getElementById("cov-list").innerHTML = order.filter(function (c) { return groups[c]; })
-      .map(function (c) {
-        return '<div class="cov-grp">' + esc(c) + " (" + groups[c].length + ")</div><table class=\"cov-t\">" +
-          groups[c].map(function (s) {
-            var fresh = s.lastChecked && days(s.lastChecked) >= -7;
-            var when = s.lastChecked
-              ? '<span class="' + (fresh ? "" : "stale") + '">' + fmt(s.lastChecked) + "</span>"
-              : '<span class="stale">Never</span>';
-            var name = s.url
-              ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.name) + "</a>"
-              : esc(s.name);
-            return "<tr><td>" + name + "</td><td>" + when + "</td><td>" + esc(s.result || "\u2014") + "</td></tr>";
-          }).join("") + "</table>";
-      }).join("");
+      t+" of "+src.length+" checked on "+fmt(DATA.asOf)+(n?" · "+n+" not yet checked":" · all covered");
+    var order=["Central","Defence","PSU","Banking/Finance","Karnataka"], g={};
+    src.forEach(function(s){ (g[s.category]=g[s.category]||[]).push(s); });
+    document.getElementById("cov-list").innerHTML = order.filter(function(c){return g[c];}).map(function(c){
+      return '<div class="cov-grp">'+esc(c)+" ("+g[c].length+')</div><table class="cov-t">'+
+        g[c].map(function(s){
+          var fresh=s.lastChecked && days(s.lastChecked)>=-7;
+          var when=s.lastChecked?'<span class="'+(fresh?"":"stale")+'">'+fmt(s.lastChecked)+"</span>"
+                                :'<span class="stale">Never</span>';
+          var nm=s.url?'<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.name)+"</a>":esc(s.name);
+          return "<tr><td>"+nm+"</td><td>"+when+"</td><td>"+esc(s.result||"—")+"</td></tr>";
+        }).join("")+"</table>";
+    }).join("");
   })();
 
   document.getElementById("logbody").innerHTML = DATA.log.slice()
-    .sort(function (a, b) { return b.date.localeCompare(a.date); })
-    .map(function (l) {
-      return "<tr><td>" + fmt(l.date) + "</td><td>" + esc(l.added) + "</td><td>" +
-        esc(l.total) + "</td><td>" + esc(l.orgs) + "</td><td>" + esc(l.timestamp) + "</td></tr>";
-    }).join("");
+    .sort(function(a,b){ return b.date.localeCompare(a.date); })
+    .map(function(l){ return "<tr><td>"+fmt(l.date)+"</td><td>"+esc(l.added)+"</td><td>"+esc(l.total)+
+      "</td><td>"+esc(l.orgs)+"</td><td>"+esc(l.timestamp)+"</td></tr>"; }).join("");
+
+  // Mark this visit last, so the "new since" banner reflects the *previous* visit.
+  try { localStorage.setItem(SEEN, DATA.asOf); } catch(e){}
 })();
 </script>
 </body>
