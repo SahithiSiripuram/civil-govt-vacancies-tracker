@@ -128,6 +128,29 @@ table.log { border-collapse:collapse; width:100%; font-size:12.5px; }
 table.log th, table.log td { border:1px solid var(--line); padding:7px 9px; text-align:left; vertical-align:top; }
 table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
 .note { font-size:11.5px; color:var(--tx3); margin-top:14px; line-height:1.65; }
+.ex-wrap { margin:4px 0 22px; }
+.ex-hd { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:10px; }
+.ex-hd h2 { margin:0; border:0; padding:0; }
+.ex-hd .dt { font-size:11.5px; }
+.ex-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px; }
+.ex { border:1px solid var(--line); border-radius:10px; background:var(--panel2); padding:13px 14px; }
+.ex.ph { border-style:dashed; }
+.ex-name { font-size:14.5px; font-weight:650; line-height:1.3; }
+.ex-org { font-size:11.5px; color:var(--tx2); margin:2px 0 8px; }
+.ex-next { background:var(--civ-b); color:var(--civ-t); border-radius:8px; padding:7px 10px; font-size:12.5px; margin-bottom:9px; }
+.ex-next b { font-size:13px; }
+.ex-next.hot { background:var(--hot-b); color:var(--hot-t); }
+.ex-st { font-size:12px; color:var(--tx2); margin-bottom:8px; }
+ol.ex-tl { list-style:none; margin:0; padding:0; font-size:12.5px; }
+ol.ex-tl li { display:grid; grid-template-columns:18px 104px 1fr; gap:6px; padding:4px 0; border-top:1px solid var(--line2); }
+ol.ex-tl li .ic { color:var(--tx3); }
+ol.ex-tl li.done { color:var(--tx3); }
+ol.ex-tl li.done .ic { color:var(--ok-t); }
+ol.ex-tl li.pend .ic, ol.ex-tl li.pend .w { color:var(--warn); }
+ol.ex-tl li .w { white-space:nowrap; }
+ol.ex-tl li .nt { display:block; font-size:11px; color:var(--tx3); }
+.ex-links { margin-top:9px; padding-top:8px; border-top:1px solid var(--line2); display:flex; gap:14px; font-size:12.5px; font-weight:550; }
+@media (max-width: 640px) { .ex-grid { grid-template-columns:1fr; } ol.ex-tl li { grid-template-columns:16px 92px 1fr; } }
 .empty { text-align:center; color:var(--tx3); padding:26px; border:1px dashed var(--line); border-radius:10px; }
 @media (max-width: 860px) {
   body { padding:16px 14px 40px; font-size:15px; }
@@ -165,6 +188,11 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
 </div>
 
 <div class="banner" id="banner"></div>
+
+<section class="ex-wrap" id="exams">
+  <div class="ex-hd"><h2>My exams</h2><span class="dt" id="ex-sum"></span></div>
+  <div class="ex-grid" id="ex-grid"></div>
+</section>
 
 <div class="cards">
   <div class="card"><div class="n" id="c-notif">0</div><div class="l">Open notifications</div><div class="h">listed below</div></div>
@@ -1342,6 +1370,200 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
       "orgs": "Indian Navy; NHIDCL; EPIL; Indian Army (SSC Tech-68 Men, SSCW Tech-68 Women); Karnataka Examinations Authority (Land Surveyor, VAO); Delhi Cantonment Board (AE & JE); HAL; ISRO; RRB (CEN 04/2026)",
       "timestamp": "01-Aug-2026 00:00 IST"
     }
+  ],
+  "exams": [
+    {
+      "exam": "AAI Junior Executive (Survey & Cartography) — CBT",
+      "organization": "Airports Authority of India (AAI)",
+      "post": "Junior Executive (Survey & Cartography) — Post Code 15, Advt. No. 12/2026/CHQ/DR-CBT",
+      "markKey": "airportsauthorityofindiaaai|juniorexecutivesurveycartography",
+      "addedFrom": "Marked Applied on tracker",
+      "status": "Exam date announced; admit card not yet released",
+      "portal": "https://www.aai.aero/en/careers/recruitment",
+      "notificationLink": "https://www.aai.aero/sites/default/files/examdashboard_pressnote/Exam%20Notice.pdf",
+      "lastChecked": "2026-10-04",
+      "events": [
+        {
+          "date": "",
+          "end": "",
+          "label": "Application submitted",
+          "state": "done",
+          "note": "Advt. 12/2026/CHQ/DR-CBT"
+        },
+        {
+          "date": "2026-09-23",
+          "end": "",
+          "label": "Tentative exam schedule notice published",
+          "state": "done",
+          "note": "AAI notice dated 23.09.2026"
+        },
+        {
+          "date": "",
+          "end": "",
+          "label": "Admit card",
+          "state": "pending",
+          "note": "Not released yet — AAI issues it a few days before the CBT on its recruitment dashboard"
+        },
+        {
+          "date": "2026-10-21",
+          "end": "",
+          "label": "Computer Based Test (CBT)",
+          "state": "upcoming",
+          "note": "Tentative, per AAI notice; 120 questions, 2 hours, no negative marking"
+        }
+      ]
+    },
+    {
+      "exam": "KPSC Gazetted Probationers (KAS) 2026-27",
+      "organization": "Karnataka Public Service Commission (KPSC)",
+      "post": "Gazetted Probationers Group A & B — 319 posts",
+      "markKey": "karnatakapublicservicecommissionkpsc|gazettedprobationerskasgroupab18designations",
+      "addedFrom": "Marked Applied on tracker",
+      "status": "Applications closed (extended to 07-Sep); prelims scheduled; admit card not yet released",
+      "portal": "https://kpsc.kar.nic.in",
+      "notificationLink": "https://kpsc.kar.nic.in/Time%20Table%20GP%202026-27%20HOSTED%20ON%2031-07-2026.pdf",
+      "lastChecked": "2026-10-04",
+      "events": [
+        {
+          "date": "",
+          "end": "",
+          "label": "Application submitted",
+          "state": "done",
+          "note": "Window closed 07-Sep-2026 (extended)"
+        },
+        {
+          "date": "",
+          "end": "",
+          "label": "Prelims admission ticket",
+          "state": "pending",
+          "note": "Not released yet — watch kpsc.kar.nic.in"
+        },
+        {
+          "date": "2026-11-15",
+          "end": "",
+          "label": "Preliminary exam",
+          "state": "upcoming",
+          "note": "Probable date, KPSC time table hosted 31-07-2026"
+        },
+        {
+          "date": "2026-12-15",
+          "end": "",
+          "label": "Prelims result",
+          "state": "upcoming",
+          "note": "Probable"
+        },
+        {
+          "date": "2026-12-21",
+          "end": "2027-01-11",
+          "label": "Mains application window",
+          "state": "upcoming",
+          "note": "Probable"
+        },
+        {
+          "date": "2027-02-12",
+          "end": "2027-02-18",
+          "label": "Main exam (12, 14, 16, 18 Feb)",
+          "state": "upcoming",
+          "note": "Probable"
+        },
+        {
+          "date": "2027-04-27",
+          "end": "",
+          "label": "Mains result",
+          "state": "upcoming",
+          "note": "Probable"
+        },
+        {
+          "date": "2027-05-10",
+          "end": "2027-05-31",
+          "label": "Personality test",
+          "state": "upcoming",
+          "note": "Probable; provisional list ~05-06-2027"
+        }
+      ]
+    },
+    {
+      "exam": "UPSC Engineering Services (ESE) 2027 — Civil",
+      "organization": "Union Public Service Commission (UPSC) — ESE 2027",
+      "post": "Engineering Services Examination 2027 (Civil Engineering category)",
+      "markKey": "unionpublicservicecommissionupscese2027|engineeringservicesexamination2027civilengineeringcategory",
+      "addedFrom": "Added on request (applied, not yet marked)",
+      "status": "Applied; next step is the e-admit card in January",
+      "portal": "https://upsconline.nic.in",
+      "notificationLink": "https://www.upsc.gov.in/sites/default/files/Notif-ESEP-2027-Engl-160926.pdf",
+      "lastChecked": "2026-10-04",
+      "events": [
+        {
+          "date": "",
+          "end": "",
+          "label": "Application submitted",
+          "state": "done",
+          "note": "Window 16-Sep to 06-Oct-2026; no withdrawal after submission"
+        },
+        {
+          "date": "2027-01-22",
+          "end": "",
+          "label": "e-Admit card (expected)",
+          "state": "upcoming",
+          "note": "UPSC issues it on the last working day of the week before the exam — estimated, not announced"
+        },
+        {
+          "date": "2027-01-31",
+          "end": "",
+          "label": "Preliminary / Stage-I exam",
+          "state": "upcoming",
+          "note": "Per Examination Notice No. 02/2027-ENGG."
+        },
+        {
+          "date": "2027-06-18",
+          "end": "",
+          "label": "Main / Stage-II exam",
+          "state": "upcoming",
+          "note": "Per notification"
+        }
+      ]
+    },
+    {
+      "exam": "GATE 2027 — Civil Engineering (CE)",
+      "organization": "IIT Madras (organising institute, GATE 2027)",
+      "post": "Graduate Aptitude Test in Engineering 2027",
+      "markKey": "",
+      "addedFrom": "Added on request (not a tracker row)",
+      "status": "Registered; admit card due 04-Jan-2027; CE paper date not yet announced",
+      "portal": "https://gate2027.iitm.ac.in",
+      "notificationLink": "https://gate2027.iitm.ac.in",
+      "lastChecked": "2026-10-04",
+      "events": [
+        {
+          "date": "",
+          "end": "",
+          "label": "Registration submitted",
+          "state": "done",
+          "note": "Keep the same DigiLocker account — GATE communicates only through it"
+        },
+        {
+          "date": "2027-01-04",
+          "end": "",
+          "label": "Admit card download",
+          "state": "upcoming",
+          "note": "Official date (liable to change); exam-city notification TBA"
+        },
+        {
+          "date": "2027-02-06",
+          "end": "2027-02-21",
+          "label": "Exam window (6, 7, 13, 14, 20, 21 Feb)",
+          "state": "upcoming",
+          "note": "CE paper session/date not yet announced"
+        },
+        {
+          "date": "2027-03-19",
+          "end": "",
+          "label": "Results",
+          "state": "upcoming",
+          "note": "Official date"
+        }
+      ]
+    }
   ]
 }
 </script>
@@ -1553,9 +1775,50 @@ table.log th { background:var(--panel); font-weight:600; color:var(--tx2); }
     document.getElementById("cards").innerHTML=out;
   }
 
+
+  // ---- my exams (applied) ----
+  function realDays(iso){ var n=new Date(); n.setHours(0,0,0,0);
+    return Math.round((new Date(iso+"T00:00:00")-n)/864e5); }
+  function rel(d){ if(d===0) return "today"; if(d===1) return "tomorrow"; if(d<0) return (-d)+" days ago";
+    if(d<14) return "in "+d+" days"; if(d<60) return "in "+Math.round(d/7)+" weeks"; return "in "+Math.round(d/30)+" months"; }
+  function evState(e){ if(e.state==="done") return "done"; if(e.state==="pending"||!e.date) return "pend";
+    var last=e.end||e.date; return (e.state==="done"||realDays(last)<0)?"done":"up"; }
+  function nextEv(x){ var up=(x.events||[]).filter(function(e){ return evState(e)==="up"; })
+      .sort(function(a,b){ return a.date.localeCompare(b.date); }); return up[0]||null; }
+  function renderExams(){
+    var ex=(DATA.exams||[]).slice(), covered={};
+    ex.forEach(function(x){ if(x.markKey) covered[x.markKey]=1; });
+    var byKey={}; DATA.vacancies.forEach(function(r){ byKey[keyOf(r.organization,r.post)]=r; });
+    var extra=Object.keys(marks).filter(function(k){ return marks[k]==="applied" && !covered[k]; });
+    ex.sort(function(a,b){ var na=nextEv(a), nb=nextEv(b);
+      return (na?na.date:"9999").localeCompare(nb?nb.date:"9999"); });
+    var html=ex.map(function(x){
+      var n=nextEv(x), dd=n?realDays(n.date):null;
+      var nx=n?'<div class="ex-next'+(dd<=7?" hot":"")+'">Next: <b>'+esc(n.label)+'</b> · '+fmt(n.date)+
+        (n.end?" – "+fmt(n.end):"")+" · "+rel(dd)+"</div>":'<div class="ex-next">No dated step ahead</div>';
+      var tl=(x.events||[]).map(function(e){ var s=evState(e);
+        var when=e.date?fmt(e.date)+(e.end?" –<br>"+fmt(e.end):""):(s==="done"?"Done":"Not out yet");
+        var ic=s==="done"?"&#10003;":(s==="pend"?"&#9675;":"&#9679;");
+        return '<li class="'+(s==="done"?"done":(s==="pend"?"pend":""))+'"><span class="ic">'+ic+'</span><span class="w">'+when+
+          "</span><span>"+esc(e.label)+(e.note?'<span class="nt">'+esc(e.note)+"</span>":"")+"</span></li>"; }).join("");
+      var links=[]; if(x.portal) links.push('<a href="'+esc(x.portal)+'" target="_blank" rel="noopener">Portal &#8599;</a>');
+      if(x.notificationLink && x.notificationLink!==x.portal) links.push('<a href="'+esc(x.notificationLink)+'" target="_blank" rel="noopener">Notice &#8599;</a>');
+      return '<div class="ex"><div class="ex-name">'+esc(x.exam)+'</div><div class="ex-org">'+esc(x.organization)+
+        (x.lastChecked?" · checked "+fmt(x.lastChecked):"")+"</div>"+nx+
+        (x.status?'<div class="ex-st">'+esc(x.status)+"</div>":"")+'<ol class="ex-tl">'+tl+"</ol>"+
+        (links.length?'<div class="ex-links">'+links.join("")+"</div>":"")+"</div>"; }).join("");
+    html+=extra.map(function(k){ var r=byKey[k];
+      return '<div class="ex ph"><div class="ex-name">'+esc(r?r.post:k)+'</div><div class="ex-org">'+esc(r?r.organization:"Marked Applied")+
+        '</div><div class="ex-st">Marked Applied — exam dates and admit-card updates will appear here after the next daily refresh.</div>'+
+        (r&&r.notificationLink?'<div class="ex-links"><a href="'+esc(r.notificationLink)+'" target="_blank" rel="noopener">Notice &#8599;</a></div>':"")+"</div>"; }).join("");
+    var tot=ex.length+extra.length;
+    document.getElementById("ex-grid").innerHTML = tot?html:'<div class="empty">Mark a vacancy as Applied and its exam schedule will be tracked here.</div>';
+    document.getElementById("ex-sum").textContent = tot+(tot===1?" exam":" exams")+" · soonest next step first";
+  }
+
   function render(){
     var list=visible();
-    stats(list); renderTable(list); renderCards(list);
+    renderExams(); stats(list); renderTable(list); renderCards(list);
     document.getElementById("count").textContent =
       list.length+(list.length===1?" vacancy":" vacancies")+
       (list.length!==all.length?" of "+all.length:"")+" · soonest deadline first";

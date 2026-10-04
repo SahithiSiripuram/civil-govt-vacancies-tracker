@@ -52,6 +52,22 @@ so they survive daily data refreshes, but stay on the device where they were mad
 The status filter row switches between **All**, **To act on** (open and not yet dealt with),
 **Applied**, and **Dismissed**.
 
+## My exams
+
+A **My exams** section at the top tracks every exam Anush has applied for — exam dates, admit-card
+releases, results and next stages — sorted by the soonest upcoming step. Entries live in the
+`exams` array of the same JSON block:
+
+```json
+{ "exam": "", "organization": "", "post": "", "markKey": "org|post key of the Applied mark, or empty",
+  "addedFrom": "", "status": "", "portal": "", "notificationLink": "", "lastChecked": "YYYY-MM-DD",
+  "events": [ { "date": "YYYY-MM-DD or empty", "end": "", "label": "", "state": "done|upcoming|pending", "note": "" } ] }
+```
+
+Any row marked **Applied** that has no `exams` entry yet shows immediately as a placeholder card; the
+daily task reads the marks from `/api/marks`, adds a full entry, and keeps every entry's dates and
+admit-card status current from the official sites.
+
 ## Data
 
 All data lives in one JSON block inside `index.html`:
